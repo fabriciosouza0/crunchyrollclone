@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import SwiperCore, { Swiper, SwiperOptions } from 'swiper';
+import SwiperCore, { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'slider-inline',
@@ -41,19 +41,9 @@ export class SliderInlineComponent implements OnInit {
 
   };
 
-  private swiper!: Swiper;
-
   constructor() { }
 
   ngOnInit(): void {
-    this.swiper = new Swiper('#inline');
-  }
-
-  resetSwiper() {
-    this.swiper.destroy;
-    if (!(this.swiper instanceof Swiper)) {
-      this.swiper = new Swiper('#inline', this.config);
-    }
   }
 
 }

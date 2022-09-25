@@ -6,7 +6,7 @@
     <swiper #swiper [config]="config" id="inline">
         <ng-template swiperSlide *ngFor="let item of sliderData">
             <div>
-                <a routerLink="/detalhes/{{mediaType == 'movie' ? 'movie' : 'tv'}}/{{item.id}}" (click)="resetSwiper()">
+                <a routerLink="/detalhes/{{mediaType == 'movie' ? 'movie' : 'tv'}}/{{item.id}}">
                     <div class="arc-card-inline">
                         <div class="card-inline-poster">
                             <img defaultImage="assets/images/loading.gif"
