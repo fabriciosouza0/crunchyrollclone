@@ -29,7 +29,7 @@
 .genres {
   flex-wrap: wrap;
   column-gap: 0.313rem;
-  row-gap: 1.063rem;
+  row-gap: 0.68rem;
   padding: 0.4rem 0rem;
 }
 

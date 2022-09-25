@@ -31,9 +31,13 @@
   padding: 0 0 1.5rem;
 }
 
-.footer-section:last-child {
-  padding: 1.5rem 0 0;
+.footer-section:nth-child(3) {
+  padding-bottom: 0;
   border-bottom: none;
+}
+
+.footer-section:last-child {
+  display: none;
 }
 
 .section-title {
@@ -115,11 +119,12 @@
     border: none;
   }
 
-  .footer-section:last-child {
-    display: none;
+  .footer-section:nth-child(3) {
+    padding: 0;
   }
 
   .footer-section:first-child {
+    justify-content: flex-start;
     padding: 0;
   }
 
