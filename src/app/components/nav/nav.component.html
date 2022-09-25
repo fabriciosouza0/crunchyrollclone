@@ -1,0 +1,97 @@
+<nav class="nav-bar">
+    <div class="nav-arc">
+        <div class="nav-bar-left">
+            <div class="nav-brand">
+                <img class="logo" src="assets/images/logo.png" alt="Logo" draggable="false" />
+
+                <a [routerLink]="(['/'])">
+                    DatMovie
+                </a>
+            </div>
+            <div class="btn-menu-arc" (click)="toggleNav('.btn-menu', '.mobile-menu-arc')">
+                <button class="btn-menu nav-link">
+                    <mat-icon aria-hidden="false" aria-label="Abir menu" inline="true" fontIcon="menu"></mat-icon>
+                </button>
+            </div>
+            <div class="mobile-menu-arc back-filter"
+                (click)="closeMenu($event, '.btn-menu', '.mobile-menu-arc', '.nav-links')" data-expanded="false">
+                <ul class="nav-links">
+                    <a [routerLink]="(['/'])" class="nav-link">Home</a>
+                    <a [routerLink]="(['discover'])" class="nav-link">Discover</a>
+                </ul>
+            </div>
+        </div>
+        <div class="nav-bar-right">
+            <div class="nav">
+                <ul class="nav-links">
+                    <a href="" class="nav-link" style="font-size: 1.7rem;">
+                        <mat-icon aria-hidden="false" aria-label="Pesquisar" inline="true" fontIcon="search">
+                        </mat-icon>
+                    </a>
+                    <button (click)="toggleNav('#user_nav', '.arc-nav-user')" class="nav-link" id="user_nav">
+                        <div class="nav-link-icon">
+                            <img class="nav-profile-pic" [src]="userPic" alt="Foto do Perfil" draggable="false" />
+                            <mat-icon style="font-size: 1.5rem;" aria-hidden="false" aria-label="Pesquisar"
+                                inline="true" fontIcon="arrow_drop_down">
+                            </mat-icon>
+                        </div>
+                    </button>
+                </ul>
+                <div class="arc-nav-user back-filter"
+                    (click)="closeMenu($event, '#user_nav', '.arc-nav-user', '.nav-user')">
+                    <div class="arc-nav">
+                        <nav class="nav-user">
+                            <section class="user-section">
+                                <div class="c-user">
+                                    <div class="c-user-info">
+                                        <img src="/assets/images/user.png" alt="" draggable="false">
+                                        <span>{{userName}}</span>
+                                    </div>
+                                    <div class="c-user-logout">
+                                        <button>
+                                            <div class="nav-link-icon">
+                                                <mat-icon style="font-size: 1.5rem;" aria-hidden="false"
+                                                    aria-label="Sair" inline="true" fontIcon="perm_identity">
+                                                </mat-icon>
+                                                <span>Conta</span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="user-section">
+                                <a href="" class="nav-user-link">
+                                    <div class="nav-link-icon" style="gap: 0.8rem; padding: 0.5rem 1rem;">
+                                        <mat-icon style="font-size: 1.5rem;" aria-hidden="false"
+                                            aria-label="Informações da Conta" inline="true"
+                                            fontIcon="format_list_bulleted">
+                                        </mat-icon>
+                                        <span>Minha lista</span>
+                                    </div>
+                                </a>
+                                <a href="" class="nav-user-link">
+                                    <div class="nav-link-icon" style="gap: 0.8rem; padding: 0.5rem 1rem;">
+                                        <mat-icon style="font-size: 1.5rem;" aria-hidden="false"
+                                            aria-label="Informações da Conta" inline="true" fontIcon="history">
+                                        </mat-icon>
+                                        <span>Histórico</span>
+                                    </div>
+                                </a>
+                            </section>
+                            <section class="user-section">
+                                <a href="" class="nav-user-link">
+                                    <div class="nav-link-icon" style="gap: 0.8rem; padding: 0.5rem 1rem;">
+                                        <mat-icon style="font-size: 1.5rem;" aria-hidden="false"
+                                            aria-label="Informações da Conta" inline="true" fontIcon="logout">
+                                        </mat-icon>
+                                        <span>Sair</span>
+                                    </div>
+                                </a>
+                            </section>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

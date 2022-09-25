@@ -1,0 +1,27 @@
+<div class="backdrop" *ngIf="details | async as mediaData; else loadingBackdrop" [ngStyle]="{
+    '--backdrop-img': 'url('+ baseImgUrl + 'original/' + mediaData.backdrop_path +')'
+}">
+    <img src="{{baseImgUrl}}original/{{mediaData.poster_path}}"
+        alt="{{mediaData?.title ? mediaData.title : mediaData.name}}" draggable="false" />
+</div>
+<div class="container">
+    <section class="arc-details-top flex">
+        <details-general [mediaType]="mediaType" [details]="details"></details-general>
+        <details-trailer></details-trailer>
+    </section>
+
+    <section class="tv-temps" *ngIf="mediaType == 'tv'">
+        <details-tv-temps></details-tv-temps>
+    </section>
+
+    <div class="arc-related">
+        <slider-inline [mediaType]="mediaType!" [sliderTitle]="'Relacionados'" [sliderData$]="related">
+        </slider-inline>
+    </div>
+</div>
+
+<ng-template #loadingBackdrop>
+    <div class="main-item">
+        <div class="backdrop animated-background"></div>
+    </div>
+</ng-template>

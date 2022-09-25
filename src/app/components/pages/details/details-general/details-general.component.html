@@ -1,0 +1,60 @@
+<div class="arc-info" *ngIf="details | async as mediaData; else loadingDetails">
+    <h1 class="title">{{mediaData?.title ? mediaData.title : mediaData.name}}</h1>
+
+    <div class="arc-sub-info flex">
+        <h5 class="tagline">{{mediaData.tagline}}</h5>
+        <div class="genres flex" style="gap: 5px; padding: 0.4rem 0rem;">
+            <div *ngFor="let genre of mediaData.genres">
+                <span class="genre">{{genre.name}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="arc-duration" *ngIf="mediaType == 'movie'; else tvDuration">
+        <span class="duration">Duração: {{mediaData.runtime}}min</span>
+    </div>
+    <ng-template #tvDuration>
+        <div class="arc-duration">
+            <span class="duration">Primeira Exibição: {{mediaData.first_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Ultíma Exibição: {{mediaData.last_air_date | date: 'dd/MM/y'}}</span>
+        </div>
+    </ng-template>
+
+    <div class="actions flex">
+        <button class="copy-link">
+            <div class="flex" [style.gap]="'5px'">
+                <mat-icon [style.fontSize]="'1.5rem'" aria-hidden="false" aria-label="Pesquisar" inline="true"
+                    fontIcon="content_copy">
+                </mat-icon>
+                <span class="only-large-devices">COPIAR LINK</span>
+            </div>
+        </button>
+
+        <button class="add-to-list">
+            <div class="flex" [style.gap]="'5px'" [style.justifyContent]="'center'" [style.alignItems]="'center'">
+                <mat-icon [style.fontSize]="'1.5rem'" aria-hidden="false" aria-label="Pesquisar" inline="true"
+                    fontIcon="add">
+                </mat-icon>
+                <span class="only-large-devices">ADICIONAR À LISTA DE FAVORITOS</span>
+                <span class="only-small-devices">ADICIONAR À LISTA</span>
+            </div>
+        </button>
+    </div>
+    <div class="overview">{{mediaData?.overview ? mediaData?.overview : 'Nenhuma descrição disponível ;('}}
+    </div>
+</div>
+
+<ng-template #loadingDetails>
+    <div class="arc-info" style="max-width: 90vw; width: 35rem;">
+        <div class="title animated-background" style="width: 100%; height: 1.8rem;"></div>
+        <div class="arc-sub-info animated-background" style="width: 100%; height: 4rem;"></div>
+        <div class="arc-duration">
+            <span class="duration animated-background" style="width: 50%; width: 10rem; height: 1.2rem;"></span>
+        </div>
+        <div class="actions flex">
+            <div class="animated-background" style="width: 40%; height: 3.5rem;"></div>
+            <div class="animated-background" style="width: 60%; width: 10rem; height: 3.5rem;"></div>
+        </div>
+        <div class="overview animated-background" style="width: 100%; height: 5rem;"></div>
+    </div>
+</ng-template>

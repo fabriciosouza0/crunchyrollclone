@@ -1,0 +1,294 @@
+.nav-bar {
+  position: fixed;
+  width: 100% !important;
+  background-color: var(--nav-color);
+  z-index: 1000;
+}
+
+.nav-profile-pic {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-arc {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 3.75rem;
+  margin: 0 auto;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  padding: 0rem 1.125rem;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 60%;
+}
+
+.nav-brand a {
+  display: none;
+  line-height: 3.75rem;
+  font-weight: 900;
+  color: var(--main-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-brand a:hover {
+  color: #fff;
+}
+
+.nav-bar-left,
+.nav-bar-right {
+  display: flex;
+  position: relative;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100%;
+  line-height: 3.75rem;
+}
+
+.nav-link {
+  list-style: none;
+  padding: 0 0.8125rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: var(--bg-hover-color);
+  color: rgba(255, 255, 255, 1);
+}
+
+.btn-menu-arc {
+  display: flex;
+  align-items: stretch;
+}
+
+.btn-menu {
+  padding: 0px 1rem;
+  font-size: 2rem;
+  line-height: 3.75rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+button.active {
+  background-color: var(--bg-hover-color);
+  color: rgba(255, 255, 255, 1);
+}
+
+.nav-link-icon {
+  display: flex;
+  column-gap: 5px;
+}
+
+.nav-user {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  background-color: var(--bg-hover-color);
+}
+
+.user-section {
+  padding: 1rem 0rem;
+  border-bottom: 2px solid var(--nav-color);
+}
+
+.user-section:first-child {
+  padding: 1rem;
+}
+
+.user-section:last-child {
+  border-bottom: none;
+}
+
+.c-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: center;
+}
+
+.c-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.c-user-info img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.c-user-info span {
+  font-size: 1.2rem;
+  font-weight: 500;
+  position: relative;
+  cursor: default;
+}
+
+.c-user-logout {
+  width: 100%;
+}
+
+.c-user-logout button {
+  width: 100%;
+  padding: 0.5rem 0rem;
+  text-align: center;
+  background-color: #fab818;
+  opacity: 1;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.c-user-logout button:hover {
+  opacity: 0.8;
+}
+
+.c-user-logout button div {
+  justify-content: center;
+}
+
+.c-user-logout button span {
+  font-size: 1.1rem;
+}
+
+.nav-user-link {
+  color: #fff;
+  background-color: #fff;
+}
+
+.nav-user-link .nav-link-icon {
+  background-color: transparent;
+}
+
+.nav-user-link:hover > .nav-link-icon {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-user-arc {
+  position: absolute;
+  top: 3.75rem;
+  right: 0px;
+  background-color: var(--modal-bg-color);
+  width: 100vw;
+  height: 100vh;
+}
+
+.back-filter {
+  position: fixed;
+  left: 0px;
+  top: 3.75rem;
+  background-color: var(--modal-bg-color);
+  height: calc(100vh - 3.75rem);
+  width: 100vw;
+}
+
+/* 280px */
+@media (min-width: 17.5rem) {
+  .nav-arc {
+    padding: 0rem 0rem;
+  }
+
+  .nav-brand {
+    padding: 0rem 1.125rem;
+  }
+
+  .mobile-menu-arc,
+  .arc-nav-user {
+    display: none;
+  }
+
+  .mobile-menu-arc.active,
+  .arc-nav-user.active {
+    display: flex !important;
+  }
+
+  .mobile-menu-arc .nav-links {
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--bg-hover-color);
+  }
+
+  .btn-menu-arc {
+    display: flex;
+  }
+
+  .nav-bar-left {
+    flex-direction: row-reverse;
+  }
+}
+
+/* 570px */
+@media (min-width: 35.625rem) {
+  .nav-brand a {
+    display: block;
+  }
+
+  .mobile-menu-arc .nav-links {
+    width: 17.75rem;
+  }
+
+  .nav-user {
+    width: 20rem;
+    height: auto;
+  }
+}
+
+/* 900px */
+@media (min-width: 61.25rem) {
+  .nav-brand {
+    padding: 0rem 1rem;
+  }
+
+  .mobile-menu-arc {
+    display: flex !important;
+    position: relative;
+    top: 0px;
+    background-color: transparent;
+    height: auto;
+    width: auto;
+  }
+
+  .mobile-menu-arc .nav-links {
+    flex-direction: row;
+    width: auto;
+    background-color: transparent;
+  }
+
+  .nav-bar-left {
+    flex-direction: row !important;
+  }
+
+  .btn-menu-arc {
+    display: none;
+  }
+}
+
+/* 1300px */
+@media (min-width: 84rem) {
+  .nav-arc,
+  .arc-nav {
+    position: relative;
+    width: 84rem;
+    margin: 0 auto;
+  }
+}

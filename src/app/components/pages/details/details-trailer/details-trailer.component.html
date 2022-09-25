@@ -1,0 +1,30 @@
+<article class="arc-trailer">
+    <div class="embed-trailer" *ngIf="trailer | async as dataTrailer; else loadingTrailer">
+        <iframe class="trailer" *ngIf="dataTrailer != 'notFound'; else trailerNotFound" [src]="dataTrailer"
+            type="text/html"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen frameborder="0"></iframe>
+    </div>
+    <div class="arc-play" *ngIf="imdbId$ |async as imdbId; else loadingStreamLink">
+        <a href="{{baseStreamUrl+'/'+imdbId}}" crossorigin="anonymous" target="_blank">
+            <div class="play">
+                <div class="flex" [style.justifyContent]="'center'" [style.alignItems]="'center'">
+                    <mat-icon [style.fontSize]="'2.5rem'" aria-hidden="false" aria-label="Pesquisar" inline="true"
+                        fontIcon="play_arrow">
+                    </mat-icon>
+                </div>
+            </div>
+        </a>
+    </div>
+</article>
+<ng-template #loadingTrailer>
+    <div class="trailer not-found animated-background"></div>
+</ng-template>
+<ng-template #loadingStreamLink>
+    <div class="play animated-background" style="height: 3rem;"></div>
+</ng-template>
+<ng-template #trailerNotFound>
+    <div class="trailer not-found flex">
+        Nenhum Trailer/Teaser Encontrado ;(
+    </div>
+</ng-template>

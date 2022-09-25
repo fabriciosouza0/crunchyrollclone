@@ -1,0 +1,63 @@
+.arc-trailer {
+  height: 100%;
+}
+
+.embed-trailer {
+  display: none;
+}
+
+.trailer {
+  width: 300px;
+  height: 200px;
+}
+
+.play {
+  position: relative;
+  margin-top: 0.325rem;
+  width: 100%;
+  padding: 0.325rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--bg-hover-color);
+  background-color: var(--main-color);
+}
+
+.play::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  border-bottom: 0.0625rem solid #4a4e58;
+  left: 0px;
+  bottom: -1rem;
+}
+
+.not-found {
+  background-color: var(--bg-hover-color);
+  justify-content: center;
+  align-items: center;
+}
+
+/* 820px */
+@media (min-width: 51.25rem) {
+  .embed-trailer {
+    display: block;
+  }
+
+  .play {
+    margin-bottom: 0;
+  }
+
+  .play::after {
+    display: none;
+  }
+}
+
+/* 900px */
+@media (min-width: 61.25rem) {
+  .trailer {
+    width: 410px;
+    height: 220px;
+  }
+}

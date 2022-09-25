@@ -1,0 +1,93 @@
+.title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -0.0313rem;
+  margin-bottom: 0.5rem;
+}
+
+.line {
+  width: 100%;
+  height: 4px;
+  background: rgb(238, 85, 34);
+  background: rgb(42, 189, 187);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(42, 189, 187, 1) 0%,
+    rgba(42, 189, 187, 1) 65%,
+    rgba(33, 57, 68, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(42, 189, 187, 1) 0%,
+    rgba(42, 189, 187, 1) 65%,
+    rgba(33, 57, 68, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(42, 189, 187, 1) 0%,
+    rgba(42, 189, 187, 1) 65%,
+    rgba(33, 57, 68, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2abdbb",endColorstr="#213944",GradientType=1);
+
+  margin-bottom: 0.5rem;
+}
+
+#inline {
+  width: 100%;
+}
+
+.arc-card-inline {
+  padding: 0.325rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.arc-card-inline:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-inline-poster img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.card-inline-title {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card-inline-rate {
+  display: flex;
+  align-items: center;
+  gap: 0.188rem;
+  margin-top: 0.5rem;
+}
+
+.card-inline-rate div {
+  display: flex;
+  align-items: center;
+}
+
+.card-inline-rate span {
+  font-size: 0.8rem;
+}
+
+.rate-icon {
+  color: #fab818;
+  font-size: 1rem;
+}
+
+.main-item {
+  background-color: transparent;
+  width: 100%;
+}
+
+.slides {
+  display: flex;
+  gap: 5px;
+}
+.sliderLoading {
+  height: 250px;
+  width: 25%;
+}

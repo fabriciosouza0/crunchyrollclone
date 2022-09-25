@@ -1,0 +1,154 @@
+.arc-footer {
+  margin-top: 5rem;
+  position: relative;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 35%,
+    rgba(33, 57, 68, 1) 100%
+  );
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid #4a4e58;
+}
+
+.footer-section {
+  display: flex;
+  gap: 0;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem 0;
+  border-bottom: 0.0625rem solid #4a4e58;
+}
+
+.footer-section:first-child {
+  padding: 0 0 1.5rem;
+}
+
+.footer-section:last-child {
+  padding: 1.5rem 0 0;
+  border-bottom: none;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 50%;
+}
+
+.footer-nav a {
+  width: max-content;
+}
+
+.footer-nav-link {
+  font-size: 0.9rem;
+  color: #fff;
+  opacity: 0.7;
+  transition: all 0.2s ease-in-out;
+}
+
+.footer-nav-link:hover {
+  opacity: 1;
+}
+
+.footer-bottom {
+  padding: 1.5rem 0;
+}
+
+.copyright-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.btn-top button {
+  color: #fff;
+  opacity: 0.7;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-top button:hover {
+  opacity: 1;
+  background-color: var(--nav-color);
+}
+
+.btn-top button .nav-link-icon span {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* 570px */
+@media (min-width: 35.625rem) {
+  .footer-top {
+    flex-direction: row;
+    row-gap: 0;
+  }
+
+  .footer-section {
+    flex-direction: column;
+    justify-content: auto;
+    padding: 0;
+    border: none;
+  }
+
+  .footer-section:last-child {
+    display: none;
+  }
+
+  .footer-section:first-child {
+    padding: 0;
+  }
+
+  .footer-section:last-child {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .footer-nav {
+    width: auto;
+  }
+}
+
+/* 900px */
+@media (min-width: 61.25rem) {
+  .footer-top {
+    flex-direction: row;
+  }
+
+  .footer-section {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .footer-section:last-child {
+    display: block;
+  }
+
+  .footer-nav {
+    width: auto;
+  }
+}
