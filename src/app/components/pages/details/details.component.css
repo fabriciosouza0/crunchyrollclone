@@ -51,6 +51,10 @@
   height: 400px;
 }
 
+.tv-temps {
+  margin-bottom: 2rem;
+}
+
 /* 820px */
 @media (min-width: 51.25rem) {
   .arc-details-top {

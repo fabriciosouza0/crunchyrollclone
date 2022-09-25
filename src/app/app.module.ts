@@ -15,6 +15,7 @@ import { DestaqueComponent } from './components/destaque/destaque.component';
 import { TmdbApiService } from './services/tmdbApi.service';
 import { SearchComponent } from './components/pages/search/search.component';
 import { LimboComponent } from './components/limbo/limbo.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LimboComponent } from './components/limbo/limbo.component';
     MatIconModule,
     HttpClientModule,
     CarouselModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [TmdbApiService],
   bootstrap: [AppComponent]

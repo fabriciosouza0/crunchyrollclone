@@ -1,12 +1,12 @@
-<div class="backdrop" *ngIf="details | async as mediaData; else loadingBackdrop" [ngStyle]="{
-    '--backdrop-img': 'url('+ baseImgUrl + 'original/' + mediaData.backdrop_path +')'
+<div class="backdrop" *ngIf="details$ | async as details; else loadingBackdrop" [ngStyle]="{
+    '--backdrop-img': 'url('+ baseImgUrl + 'original/' + details.backdrop_path +')'
 }">
-    <img src="{{baseImgUrl}}original/{{mediaData.poster_path}}"
-        alt="{{mediaData?.title ? mediaData.title : mediaData.name}}" draggable="false" />
+    <img src="{{baseImgUrl}}original/{{details.poster_path}}" alt="{{details?.title ? details.title : details.name}}"
+        draggable="false" />
 </div>
 <div class="container">
     <section class="arc-details-top flex">
-        <details-general [mediaType]="mediaType" [details]="details"></details-general>
+        <details-general [mediaType]="mediaType" [details]="details$"></details-general>
         <details-trailer></details-trailer>
     </section>
 
@@ -15,7 +15,7 @@
     </section>
 
     <div class="arc-related">
-        <slider-inline [mediaType]="mediaType!" [sliderTitle]="'Relacionados'" [sliderData$]="related">
+        <slider-inline [mediaType]="mediaType!" [sliderTitle]="'Relacionados'" [sliderData$]="related$">
         </slider-inline>
     </div>
 </div>

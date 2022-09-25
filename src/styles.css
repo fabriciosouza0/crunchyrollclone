@@ -24,12 +24,27 @@ body {
   color: #fff;
 }
 
+h5 {
+  margin: 0;
+}
+
+ul,
+li {
+  padding: 0;
+}
+
 button {
   border: none;
   background-color: transparent;
+  padding: 0;
 }
 
 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
   color: #fff;
 }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -8,23 +10,35 @@ import { Component, OnInit } from '@angular/core';
 export class NavComponent implements OnInit {
   private isExpanded: boolean = false;
   private clickCount: number = 0;
+  private navigationEnd!: Subscription;
 
   userPic?: string;
   userName?: string;
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
     this.userPic = 'assets/images/user.png';
     this.userName = 'Derp_fp';
+
+    this.navigationEnd = this.route.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      const activeElements = document.getElementsByClassName('active');
+
+      if (activeElements.length) {
+        const elem1 = activeElements[0];
+        const elem2 = activeElements[1];
+
+        this.hide(elem1, elem2);
+      }
+    });
   }
 
-  closeMenu(e: any, button: string, target: string, excep: string) {
+  closeMenu(e: any, button: string, target: string, excepTarget: string) {
     const btn = document.querySelector(button);
     const t = document.querySelector(target);
-    const ex = document.querySelector(excep);
+    const exT = document.querySelector(excepTarget);
 
-    if (e.target !== ex && !e.target.closest(excep)) this.hide(btn, t);
+    if (e.target !== exT && !e.target.closest(excepTarget)) this.hide(btn, t);
   }
 
   toggleNav(btn: string, t: string) {
@@ -85,5 +99,9 @@ export class NavComponent implements OnInit {
       this.clickCount = 0;
       this.hide(clicked, expanded);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.navigationEnd.unsubscribe();
   }
 }
