@@ -46,18 +46,26 @@
   width: 100%;
 }
 
-.details-loading {
-  flex: 1 0 0;
-  height: 400px;
+details-general,
+details-trailer {
+  width: 100%;
 }
 
 .tv-temps {
   margin-bottom: 2rem;
 }
 
-/* 820px */
-@media (min-width: 51.25rem) {
+/* 850px */
+@media (min-width: 53.125rem) {
   .arc-details-top {
     flex-direction: row;
+  }
+
+  details-general {
+    width: 65%;
+  }
+
+  details-trailer {
+    width: 35%;
   }
 }

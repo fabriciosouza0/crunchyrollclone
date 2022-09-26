@@ -1,11 +1,11 @@
 <div class="arc-slider">
-    <div class="container">
+    <div class="wrapper">
         <slider></slider>
     </div>
 </div>
 <div class="arc-content">
     <!-- Section de Filmes -->
-    <section class="container">
+    <section class="wrapper">
         <slider-inline [mediaType]="'movie'" [sliderTitle]="'Recomendações para Você'" [sliderData$]="popularMovies$">
         </slider-inline>
         <slider-inline [mediaType]="'movie'" [sliderTitle]="'Favoritos da Crítica'" [sliderData$]="topRatedMovies$">
@@ -20,7 +20,7 @@
     <!-- Fim -->
 
     <!-- Section de Séries -->
-    <section class="container">
+    <section class="wrapper">
         <slider-inline [mediaType]="'tv'" [sliderTitle]="'Séries para Maratonar'" [sliderData$]="popularSeries$">
         </slider-inline>
         <slider-inline [mediaType]="'tv'" [sliderTitle]="'Séries Marcantes'" [sliderData$]="topRatedSeries$">

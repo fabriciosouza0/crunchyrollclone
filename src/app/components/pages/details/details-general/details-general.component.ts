@@ -12,7 +12,6 @@ export class DetailsGeneralComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

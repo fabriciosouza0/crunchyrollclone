@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'
 import { CarouselModule } from '../../carousel/carousel.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { RouterModule } from '@angular/router';
 
 import { DetailsRoutingModule } from './details.routing.module';
@@ -25,6 +26,7 @@ import { DetailsGeneralComponent } from './details-general/details-general.compo
     MatIconModule,
     CarouselModule,
     NgbDropdownModule,
+    LazyLoadImageModule,
     RouterModule,
     DetailsRoutingModule
   ]

@@ -2,7 +2,7 @@
   position: fixed;
   width: 100% !important;
   background-color: var(--nav-color);
-  z-index: 1000;
+  z-index: 1001;
 }
 
 .nav-profile-pic {

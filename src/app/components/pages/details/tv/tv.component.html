@@ -1,16 +1,39 @@
-<div class="temp-nav">
-    <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-secondary" id="dropdownBasic1"
-            ngbDropdownToggle>Temporadas</button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button ngbDropdownItem>Temp 1</button>
-            <button ngbDropdownItem>Temp 2</button>
-            <button ngbDropdownItem>Temp 3</button>
+<div *ngIf="details$ | async as details; else loadingSeasons">
+    <div class="temp-nav">
+        <div ngbDropdown class="d-inline-block">
+            <button type="button" class="btn btn-temp" id="menuTrigger" ngbDropdownToggle
+                #seasonMenu>Temporadas</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="changeSeason($event, details.id)"
+                    *ngFor="let season of details.seasons;">
+                    <input id="seasonNumber-{{season.season_number}}" type="hidden" value="{{season.season_number}}">
+                    <input id="" type="hidden" value="{{season.name}}">
+                    {{season.name}}
+                </button>
+            </div>
         </div>
     </div>
-</div>
-<section class="arc-eps">
-    <div class="ep">
 
-    </div>
-</section>
+    <section class="arc-eps" *ngIf="episodes$ |async as episodes; else loadingEps">
+        <div *ngFor="let ep of episodes">
+            <a href="https://embed.warezcdn.com/serie/{{imdbId$ |async}}/{{seasonNumber}}/{{ep.episode_number}}"
+                crossorigin="anonymous" target="_blank">
+                <div class="arc-ep">
+                    <div class="ep-poster">
+                        <img defaultImage="assets/images/loading.gif" lazyLoad="{{baseImgUrl + ep.still_path}}"
+                            errorImage="assets/images/img-not-found.png" alt="">
+                    </div>
+                    <div class="ep-title">{{ep.name}}</div>
+                </div>
+            </a>
+        </div>
+    </section>
+</div>
+
+<ng-template #loadingSeasons>
+    <div class="animated-background" style="width: 10rem; height: 3rem; margin-bottom: 0.825rem;"></div>
+    <section class="arc-eps animated-background" style="height: 20rem;"></section>
+</ng-template>
+<ng-template #loadingEps>
+    <section class="arc-eps animated-background" style="height: 20rem;"></section>
+</ng-template>

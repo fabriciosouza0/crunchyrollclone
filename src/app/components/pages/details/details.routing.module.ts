@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TmdbApiService } from 'app/services/tmdbApi.service';
 import { DetailsComponent } from './details.component';
 
 const detailsRoutes: Routes = [
-    { path: '', title: 'DatMovie - Detalhes', component: DetailsComponent }
+    { path: '', title: 'DatMovie...', component: DetailsComponent }
 ]
 
 @NgModule({
@@ -11,6 +12,6 @@ const detailsRoutes: Routes = [
         RouterModule.forChild(detailsRoutes)
     ],
     exports: [RouterModule],
-    providers: [],
+    providers: [TmdbApiService],
 })
 export class DetailsRoutingModule { }

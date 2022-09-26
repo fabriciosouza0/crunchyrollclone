@@ -65,7 +65,7 @@ a:hover {
   align-items: center;
 }
 
-.container {
+.wrapper {
   margin: 0 auto;
 }
 
@@ -94,9 +94,9 @@ a:hover {
 }
 
 .swiper-pagination-bullet {
-  height: 5px !important;
-  width: 2rem !important;
-  border-radius: 0 !important;
+  height: 5px;
+  width: 2rem;
+  border-radius: 0;
   background-color: #fff;
   opacity: 0.8;
 }
@@ -118,15 +118,9 @@ a:hover {
   animation: 1s shine linear infinite;
 }
 
-@keyframes shine {
-  to {
-    background-position-x: -200%;
-  }
-}
-
 /* 280px */
 @media (min-width: 17.5rem) {
-  .container {
+  .wrapper {
     padding: 0 1.125rem;
     width: 100%;
   }
@@ -138,14 +132,20 @@ a:hover {
 
 /* 900px */
 @media (min-width: 61.25rem) {
-  .container {
+  .wrapper {
     padding: 0 2.5rem;
   }
 }
 
 /* 1300px */
 @media (min-width: 81.25rem) {
-  .container {
+  .wrapper {
     width: calc(65.625rem + 2.5rem);
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
   }
 }

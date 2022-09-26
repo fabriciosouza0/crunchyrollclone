@@ -1,5 +1,5 @@
 <div class="arc-info" *ngIf="details | async as mediaData; else loadingDetails">
-    <h1 class="title">{{mediaData?.title ? mediaData.title : mediaData.name}}</h1>
+    <h1 class="title">{{mediaData?.title ? mediaData.title: mediaData.name}}</h1>
 
     <div class="arc-sub-info flex">
         <h5 class="tagline">{{mediaData.tagline}}</h5>
@@ -11,12 +11,13 @@
     </div>
 
     <div class="arc-duration" *ngIf="mediaType == 'movie'; else tvDuration">
+        <span class="duration">Lançamento: {{mediaData.release_date | date: 'y'}}</span>
         <span class="duration">Duração: {{mediaData.runtime}}min</span>
     </div>
     <ng-template #tvDuration>
         <div class="arc-duration">
-            <span class="duration">Primeira Exibição: {{mediaData.first_air_date | date: 'dd/MM/y'}}</span>
-            <span class="duration">Ultíma Exibição: {{mediaData.last_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Estreia: {{mediaData.first_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Fim: {{mediaData.last_air_date | date: 'dd/MM/y'}}</span>
         </div>
     </ng-template>
 
@@ -45,7 +46,7 @@
 </div>
 
 <ng-template #loadingDetails>
-    <div class="arc-info" style="max-width: 90vw; width: 35rem;">
+    <div class="arc-info loading">
         <div class="title animated-background" style="width: 100%; height: 1.8rem;"></div>
         <div class="arc-sub-info animated-background" style="width: 100%; height: 4rem;"></div>
         <div class="arc-duration">
@@ -53,7 +54,7 @@
         </div>
         <div class="actions flex">
             <div class="animated-background" style="width: 40%; height: 3.5rem;"></div>
-            <div class="animated-background" style="width: 60%; width: 10rem; height: 3.5rem;"></div>
+            <div class="animated-background" style="width: 50%; height: 3.5rem;"></div>
         </div>
         <div class="overview animated-background" style="width: 100%; height: 5rem;"></div>
     </div>

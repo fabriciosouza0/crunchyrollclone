@@ -1,17 +1,18 @@
 <div class="backdrop" *ngIf="details$ | async as details; else loadingBackdrop" [ngStyle]="{
     '--backdrop-img': 'url('+ baseImgUrl + 'original/' + details.backdrop_path +')'
 }">
-    <img src="{{baseImgUrl}}original/{{details.poster_path}}" alt="{{details?.title ? details.title : details.name}}"
+    <img (load)="setTitle(details?.title ? details.title : details.name)"
+        src="{{baseImgUrl}}original/{{details.poster_path}}" alt="{{details?.title ? details.title : details.name}}"
         draggable="false" />
 </div>
-<div class="container">
+<div class="wrapper">
     <section class="arc-details-top flex">
         <details-general [mediaType]="mediaType" [details]="details$"></details-general>
-        <details-trailer></details-trailer>
+        <details-trailer (imdbId)="setImdbId($event)"></details-trailer>
     </section>
 
     <section class="tv-temps" *ngIf="mediaType == 'tv'">
-        <details-tv-temps></details-tv-temps>
+        <details-tv-temps [imdbId$]="imdbId$"></details-tv-temps>
     </section>
 
     <div class="arc-related">

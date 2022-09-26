@@ -1,3 +1,78 @@
 .temp-nav {
-  position: relative;
+  margin-bottom: 0.825rem;
+}
+
+.temp-nav,
+.btn,
+.dropdown-item {
+  width: fit-content;
+  color: #a0a0a0;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.temp-nav:hover,
+.temp-nav:active,
+.dropdown-item:hover {
+  color: #fff;
+  background-color: var(--bg-hover-color);
+}
+
+.dropdown-menu {
+  border-radius: 0px;
+  background-color: var(--bg-hover-color);
+}
+
+.dropdown-item {
+  width: 100%;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.arc-eps {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.5rem;
+}
+
+.arc-ep {
+  padding: 0.325rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.arc-ep:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.ep-poster img {
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.ep-title {
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+/* 475px */
+@media (min-width: 29.688rem) {
+  .arc-eps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 850px */
+@media (min-width: 53.125rem) {
+  .arc-eps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 1300px */
+@media (min-width: 81.25rem) {
+  .arc-eps {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

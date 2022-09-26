@@ -27,19 +27,19 @@ export class TmdbApiService {
     return this.http.get<T>(url, { params: httpParams });
   }
 
-  details(type: string, id: number) {
+  details(type: string, id: number): Observable<any> {
     return this.request<any>(`${type}/${id}`, {}).pipe(delay(500));
   }
 
-  videos(type: string, id: number) {
+  videos(type: string, id: number): Observable<any> {
     return this.request<any>(`${type}/${id}/videos`, {}).pipe(delay(500), map(data => data.results[0]));
   }
 
-  related(type: string, id: number) {
+  related(type: string, id: number): Observable<any> {
     return this.request<any>(`${type}/${id}/similar`, {}).pipe(delay(500), map(data => data.results));
   }
 
-  imdbId(type: string, id: number) {
+  imdbId(type: string, id: number): Observable<any> {
     return this.request<any>(`${type}/${id}/external_ids`, {}).pipe(delay(500), map(data => data.imdb_id));
   }
 
@@ -47,19 +47,23 @@ export class TmdbApiService {
     return this.request<any>('movie/popular', { page: 1 }).pipe(delay(500), map(data => data.results));
   }
 
-  topRatedMovies() {
+  topRatedMovies(): Observable<any> {
     return this.request<any>('movie/top_rated', { page: 1 }).pipe(delay(500), map(data => data.results));
   }
 
-  familyMovies() {
+  familyMovies(): Observable<any> {
     return this.request<any>('discover/movie', { with_genres: 10751 }).pipe(delay(500), map(data => data.results));
   }
 
-  popularSeries() {
+  popularSeries(): Observable<any> {
     return this.request<any>('tv/popular', { page: 1 }).pipe(delay(500), map(data => data.results));
   }
 
-  topRatedSeries() {
+  topRatedSeries(): Observable<any> {
     return this.request<any>('tv/top_rated', { page: 1 }).pipe(delay(500), map(data => data.results));
+  }
+
+  seasons(id: number, seasonNumber: number) {
+    return this.request<any>(`tv/${id}/season/${seasonNumber}`, {}).pipe(delay(500));
   }
 }

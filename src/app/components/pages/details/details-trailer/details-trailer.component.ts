@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeScript, SafeStyle, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TmdbApiService } from 'app/services/tmdbApi.service';
@@ -11,13 +11,12 @@ import { map, Observable } from 'rxjs';
   styleUrls: ['./details-trailer.component.css']
 })
 export class DetailsTrailerComponent implements OnInit {
+  @Output() imdbId: EventEmitter<Observable<any>> = new EventEmitter<Observable<any>>();
   mediaType!: string;
   mediaId!: number;
   trailer?: Observable<any>;
-
   imdbId$!: Observable<any>;
   baseStreamUrl: string = environment.baseStreamUrl;
-
   mediaVideoUrl?: SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl;
 
   constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private tmdbApiService: TmdbApiService) { }
@@ -31,12 +30,13 @@ export class DetailsTrailerComponent implements OnInit {
       this.baseStreamUrl = environment.baseStreamUrl + type;
 
       this.trailer = this.tmdbApiService.videos(this.mediaType, this.mediaId).pipe(map(video => {
-        if (video) return video.key = this.transform(`https://www.youtube.com/embed/${video.key}`, 'resourceUrl')
+        if (video) return video.key = this.transform(`https://www.youtube.com/embed/${video.key}`, 'resourceUrl');
 
         return 'notFound';
       }));
 
       this.imdbId$ = this.tmdbApiService.imdbId(this.mediaType, this.mediaId);
+      this.imdbId.emit(this.imdbId$);
     });
   }
 
@@ -54,5 +54,4 @@ export class DetailsTrailerComponent implements OnInit {
 
     return this.sanitizer.bypassSecurityTrustHtml(url);
   }
-
 }
