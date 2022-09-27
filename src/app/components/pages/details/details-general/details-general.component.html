@@ -16,8 +16,9 @@
     </div>
     <ng-template #tvDuration>
         <div class="arc-duration">
-            <span class="duration">Estreia: {{details.first_air_date | date: 'dd/MM/y'}}</span>
-            <span class="duration">Fim: {{details.last_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Primeiro EP: {{details.first_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Ultímo EP: {{details.last_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Status: {{details.status}}</span>
         </div>
     </ng-template>
 
