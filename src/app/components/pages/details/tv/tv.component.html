@@ -2,12 +2,12 @@
     <div class="temp-nav">
         <div ngbDropdown class="d-inline-block">
             <button type="button" class="btn btn-temp" id="menuTrigger" ngbDropdownToggle
-                #seasonMenu>Temporadas</button>
+                #seasonMenu>{{seasonName}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem (click)="changeSeason($event, details.id)"
+                <button ngbDropdownItem [ngClass]="''" (click)="changeSeason($event, details.id, details.name)"
                     *ngFor="let season of details.seasons;">
-                    <input id="seasonNumber-{{season.season_number}}" type="hidden" value="{{season.season_number}}">
-                    <input id="" type="hidden" value="{{season.name}}">
+                    <input type="hidden" value="{{season.season_number}}">
+                    <input type="hidden" value="{{season.name}}">
                     {{season.name}}
                 </button>
             </div>
@@ -23,7 +23,8 @@
                         <img defaultImage="assets/images/loading.gif" lazyLoad="{{baseImgUrl + ep.still_path}}"
                             errorImage="assets/images/img-not-found.png" alt="">
                     </div>
-                    <div class="ep-title">{{ep.name}}</div>
+                    <div class="tv-title">{{tvName}}</div>
+                    <div class="ep-title">E{{ep.episode_number}} S{{seasonNumber}} {{ep.name}}</div>
                 </div>
             </a>
         </div>

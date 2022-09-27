@@ -51,9 +51,15 @@
   max-width: 100%;
 }
 
+.tv-title {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+  margin-top: 0.125rem;
+}
+
 .ep-title {
   font-size: 0.9rem;
-  margin-top: 0.3rem;
+  margin-top: 0.125rem;
 }
 
 /* 475px */

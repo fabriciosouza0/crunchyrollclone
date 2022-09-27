@@ -1,28 +1,28 @@
-<div class="arc-info" *ngIf="details | async as mediaData; else loadingDetails">
-    <h1 class="title">{{mediaData?.title ? mediaData.title: mediaData.name}}</h1>
+<div class="arc-info" *ngIf="details$ | async as details; else loadingDetails">
+    <h1 class="title">{{details?.title ? details.title: details.name}}</h1>
 
     <div class="arc-sub-info flex">
-        <h5 class="tagline">{{mediaData.tagline}}</h5>
+        <h5 class="tagline">{{details.tagline}}</h5>
         <div class="genres flex">
-            <div *ngFor="let genre of mediaData.genres">
+            <div *ngFor="let genre of details.genres">
                 <span class="genre">{{genre.name}}</span>
             </div>
         </div>
     </div>
 
     <div class="arc-duration" *ngIf="mediaType == 'movie'; else tvDuration">
-        <span class="duration">Lançamento: {{mediaData.release_date | date: 'y'}}</span>
-        <span class="duration">Duração: {{mediaData.runtime}}min</span>
+        <span class="duration">Lançamento: {{details.release_date | date: 'y'}}</span>
+        <span class="duration">Duração: {{details.runtime}}min</span>
     </div>
     <ng-template #tvDuration>
         <div class="arc-duration">
-            <span class="duration">Estreia: {{mediaData.first_air_date | date: 'dd/MM/y'}}</span>
-            <span class="duration">Fim: {{mediaData.last_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Estreia: {{details.first_air_date | date: 'dd/MM/y'}}</span>
+            <span class="duration">Fim: {{details.last_air_date | date: 'dd/MM/y'}}</span>
         </div>
     </ng-template>
 
     <div class="actions flex">
-        <button class="copy-link">
+        <button class="copy-link" (click)="copyLink()">
             <div class="flex" [style.gap]="'5px'">
                 <mat-icon [style.fontSize]="'1.5rem'" aria-hidden="false" aria-label="Pesquisar" inline="true"
                     fontIcon="content_copy">
@@ -41,7 +41,7 @@
             </div>
         </button>
     </div>
-    <div class="overview">{{mediaData?.overview ? mediaData?.overview : 'Nenhuma descrição disponível ;('}}
+    <div class="overview">{{details?.overview ? details?.overview : 'Nenhuma descrição disponível ;('}}
     </div>
 </div>
 
@@ -59,3 +59,5 @@
         <div class="overview animated-background" style="width: 100%; height: 5rem;"></div>
     </div>
 </ng-template>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

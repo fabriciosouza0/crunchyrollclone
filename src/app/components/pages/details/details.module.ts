@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbDropdownModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap'
 import { CarouselModule } from '../../carousel/carousel.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { RouterModule } from '@angular/router';
@@ -12,15 +12,18 @@ import { TvComponent } from './tv/tv.component';
 import { DetailsComponent } from './details.component';
 import { DetailsTrailerComponent } from './details-trailer/details-trailer.component';
 import { DetailsGeneralComponent } from './details-general/details-general.component';
+import { ToastsContainer } from './details-general/toasts-container/toasts-container.component';
+import { ToastService } from 'app/services/toast.service';
 
 @NgModule({
   declarations: [
     DetailsComponent,
     DetailsGeneralComponent,
     DetailsTrailerComponent,
-    TvComponent
+    TvComponent,
+    ToastsContainer
   ],
-  providers: [TmdbApiService],
+  providers: [TmdbApiService, ToastService],
   imports: [
     CommonModule,
     MatIconModule,
@@ -28,6 +31,7 @@ import { DetailsGeneralComponent } from './details-general/details-general.compo
     NgbDropdownModule,
     LazyLoadImageModule,
     RouterModule,
+    NgbToastModule,
     DetailsRoutingModule
   ]
 })

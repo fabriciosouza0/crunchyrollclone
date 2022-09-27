@@ -7,7 +7,7 @@
 </div>
 <div class="wrapper">
     <section class="arc-details-top flex">
-        <details-general [mediaType]="mediaType" [details]="details$"></details-general>
+        <details-general [mediaType]="mediaType" [details$]="details$"></details-general>
         <details-trailer (imdbId)="setImdbId($event)"></details-trailer>
     </section>
 
@@ -16,7 +16,7 @@
     </section>
 
     <div class="arc-related">
-        <slider-inline [mediaType]="mediaType!" [sliderTitle]="'Relacionados'" [sliderData$]="related$">
+        <slider-inline [mediaType]="mediaType!" [sliderTitle]="'Similares'" [sliderData$]="related$">
         </slider-inline>
     </div>
 </div>

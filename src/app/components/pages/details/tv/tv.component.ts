@@ -14,6 +14,8 @@ export class TvComponent implements OnInit, AfterViewInit {
   @Input() imdbId$!: Observable<any>;
   details$!: Observable<any>;
   detailsSub!: Subscription;
+  tvName!: string;
+  seasonName!: string;
   episodes$!: Observable<any>;
   seasonNumber!: number;
   baseImgUrl: string = `${environment.baseImgUrl}original/`;
@@ -37,17 +39,25 @@ export class TvComponent implements OnInit, AfterViewInit {
     this.details$ = this.tmdbApiService.details(type, tvId);
 
     this.detailsSub = this.tmdbApiService.details(type, tvId).subscribe(tv => {
+      this.tvName = tv.name;
+      this.setSeasonName(String(tv.seasons[0].name));
       this.seasonNumber = Number(tv.seasons[0].season_number);
       this.episodes$ = this.tmdbApiService.seasons(tvId, this.seasonNumber).pipe(map(season => season.episodes));
     });
   }
 
-  changeSeason(event: any, tvId: number) {
+  changeSeason(event: any, tvId: number, tvName: string) {
+    this.tvName = tvName;
     this.seasonNumber = event.target.children[0].value;
+    this.setSeasonName(event.target.children[1].value);
     this.episodes$ = this.tmdbApiService.seasons(tvId, this.seasonNumber).pipe(map(season => season.episodes));
   }
 
   ngOnDestroy(): void {
     this.detailsSub.unsubscribe();
+  }
+
+  setSeasonName(seasonName: string) {
+    this.seasonName = seasonName;
   }
 }

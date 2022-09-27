@@ -48,6 +48,10 @@ a:hover {
   color: #fff;
 }
 
+.main-color {
+  background-color: var(--main-color);
+}
+
 .flex {
   display: flex;
 }
