@@ -6,8 +6,8 @@
 /out-tsc
 /bazel-out
 
-# Env
-/src/environments
+# Environments
+src/environments
 
 # Node
 /node_modules
