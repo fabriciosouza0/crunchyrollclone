@@ -22,6 +22,12 @@
                     <div class="ep-poster">
                         <img defaultImage="assets/images/loading.gif" lazyLoad="{{baseImgUrl + ep.still_path}}"
                             errorImage="assets/images/img-not-found.png" alt="">
+                        <div class="ep-rate arc-icon-text">
+                            <mat-icon inline="true" fontIcon="star" class="rate-icon"></mat-icon>
+                            <div>
+                                <span>{{ep.vote_average | number: '1.1-1'}}</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="tv-title">{{tvName}}</div>
                     <div class="ep-title">E{{ep.episode_number}} S{{seasonNumber}} {{ep.name}}</div>

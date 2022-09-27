@@ -46,6 +46,26 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+.ep-poster {
+  position: relative;
+}
+
+.ep-rate {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 3px 5px;
+}
+
+.ep-rate mat-icon {
+  color: #fab818;
+}
+
+.ep-rate span {
+  font-size: 0.8rem;
+}
+
 .ep-poster img {
   object-fit: cover;
   max-width: 100%;
@@ -54,12 +74,12 @@
 .tv-title {
   font-size: 0.8rem;
   color: #a0a0a0;
-  margin-top: 0.125rem;
+  margin-top: 0.5rem;
 }
 
 .ep-title {
   font-size: 0.9rem;
-  margin-top: 0.125rem;
+  margin-top: 0.5rem;
 }
 
 /* 475px */

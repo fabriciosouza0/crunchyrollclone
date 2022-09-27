@@ -44,6 +44,12 @@ a {
   text-decoration: none;
 }
 
+.arc-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 0.188rem;
+}
+
 a:hover {
   color: #fff;
 }
