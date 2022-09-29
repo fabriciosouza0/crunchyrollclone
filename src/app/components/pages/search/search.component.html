@@ -1,1 +1,49 @@
-<p>search works!</p>
+<div class="wrapper">
+    <form action="" [formGroup]="searchForm" (ngSubmit)="submit()">
+        <input formControlName="search" class="title" id="search" type="search">
+    </form>
+    <div *ngIf="searchResults$ | async as searchResults; else loadingResults">
+        <div class="arc-results" *ngIf="searchResults != 'notfound' else notFound" #arcResults>
+            <div *ngFor="let result of searchResults.results">
+                <a routerLink="/detalhes/{{result?.title ? 'movie' : 'tv'}}/{{result.id}}">
+                    <div class="arc-card-inline">
+                        <div class="card-inline-poster">
+                            <img defaultImage="assets/images/loading.gif"
+                                lazyLoad="{{baseImgUrl}}w500{{result.poster_path}}"
+                                errorImage="assets/images/img-not-found.png" />
+                        </div>
+                        <div class="card-inline-title">{{result?.title ? result.title : result.name}}</div>
+                        <div class="card-inline-rate">
+                            <mat-icon inline="true" fontIcon="star" class="rate-icon"></mat-icon>
+                            <div>
+                                <span>{{result.vote_average | number: '1.1-1'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="arc-pagination" *ngIf="searchResults?.total_pages > 1">
+            <ngb-pagination [collectionSize]="searchResults.total_pages" [(page)]="page"
+                (pageChange)="pageChange(query)" [maxSize]="5" [rotate]="true" [ellipses]="false"
+                [boundaryLinks]="true">
+                <ng-template ngbPaginationFirst>1</ng-template>
+                <ng-template ngbPaginationLast>{{searchResults.total_pages}}</ng-template>
+            </ngb-pagination>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingResults>
+    <div class="arc-card-inline">
+        <div class="card-inline-poster animated-background"></div>
+        <div class="card-inline-title animated-background"></div>
+        <div class="card-inline-rate animated-background"></div>
+    </div>
+</ng-template>
+
+<ng-template #notFound>
+    <div class="flex" style="justify-content: center; align-items: center; padding: 2rem;">
+        <div class="title">Nenhum resultado encontrado ;(</div>
+    </div>
+</ng-template>

@@ -45,7 +45,7 @@ export class NavComponent implements OnInit {
     const clicked = document.querySelector(btn);
     const expanded = document.querySelector(t);
 
-    if (clicked!.classList.contains('active')) {
+    if (clicked?.classList.contains('active')) {
       this.hide(clicked, expanded);
       return;
     }
@@ -64,18 +64,18 @@ export class NavComponent implements OnInit {
   }
 
   show(clicked: Element | null, expanded: Element | null) {
-    clicked!.classList.add('active');
-    expanded!.classList.add('active');
-    expanded!.setAttribute('data-expanded', 'true');
+    clicked?.classList.add('active');
+    expanded?.classList.add('active');
+    expanded?.setAttribute('data-expanded', 'true');
 
     this.isExpanded = true;
     document.body.classList.add('lock');
   }
 
   hide(clicked: Element | null, expanded: Element | null) {
-    clicked!.classList.remove('active');
-    expanded!.classList.remove('active');
-    expanded!.setAttribute('data-expanded', 'false');
+    clicked?.classList.remove('active');
+    expanded?.classList.remove('active');
+    expanded?.setAttribute('data-expanded', 'false');
 
     this.isExpanded = false;
     document.body.classList.remove('lock');

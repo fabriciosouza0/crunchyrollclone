@@ -18,7 +18,12 @@ export class DetailsComponent implements OnInit {
   mediaId!: number;
   baseImgUrl: string = environment.baseImgUrl;
 
-  constructor(private titleService: Title, private route: ActivatedRoute, private router: Router, private tmdbApiService: TmdbApiService) { }
+  constructor(
+    private titleService: Title,
+    private route: ActivatedRoute,
+    private router: Router,
+    private tmdbApiService: TmdbApiService
+  ) { }
 
   ngOnInit(): void {
     if (!this.route.snapshot.paramMap.has('id') || !this.route.snapshot.paramMap.has('type')) this.router.navigate(['**']);
@@ -36,7 +41,7 @@ export class DetailsComponent implements OnInit {
 
     this.related$ = this.tmdbApiService.related(this.mediaType, this.mediaId);
 
-    window.scroll({ top: 0, behavior: 'auto' });
+    window.scroll({ top: 0, behavior: 'smooth' });
   }
 
   setImdbId(imdbId$: Observable<any>) {

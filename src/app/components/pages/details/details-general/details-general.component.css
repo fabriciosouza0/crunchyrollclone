@@ -58,30 +58,6 @@
   margin-bottom: 1.625rem;
 }
 
-.copy-link,
-.add-to-list {
-  cursor: pointer;
-  font-weight: 700;
-  padding: 0.9rem 0.9rem 0.8rem 0.5rem;
-  line-height: 1.2rem;
-}
-
-.copy-link {
-  color: var(--main-color);
-  border: 2px solid var(--main-color);
-}
-
-.add-to-list {
-  color: #a0a0a0;
-  background-color: transparent;
-  transition: all 0.2s ease-in-out;
-}
-
-.add-to-list:hover {
-  color: #fff;
-  background-color: var(--bg-hover-color);
-}
-
 .only-small-devices {
   display: block;
 }

@@ -19,7 +19,11 @@ export class DetailsTrailerComponent implements OnInit {
   baseStreamUrl: string = environment.baseStreamUrl;
   mediaVideoUrl?: SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl;
 
-  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private tmdbApiService: TmdbApiService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private tmdbApiService: TmdbApiService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

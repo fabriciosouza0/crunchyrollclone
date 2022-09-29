@@ -13,7 +13,10 @@ export class DetailsGeneralComponent implements OnInit {
   @Input() details$!: Observable<any>;
   mediaId!: number;
 
-  constructor(private route: ActivatedRoute, private toastService: ToastService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

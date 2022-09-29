@@ -39,9 +39,89 @@ button {
   padding: 0;
 }
 
+.btn-outline,
+.btn-text {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.9rem 0.9rem 0.8rem 0.5rem;
+  line-height: 1.2rem;
+}
+
+.btn-outline {
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
+}
+
+.btn-text {
+  color: #a0a0a0;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-text:hover {
+  color: #fff;
+  background-color: var(--bg-hover-color);
+}
+
 a {
   color: #fff;
   text-decoration: none;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -0.0313rem;
+  margin-bottom: 0.5rem;
+}
+
+.arc-card-inline {
+  position: relative;
+  padding: 0.325rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.arc-card-inline:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.arc-card-inline.loading:hover {
+  background-color: transparent;
+}
+
+.card-inline-poster {
+  position: relative;
+}
+
+.card-inline-poster img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.card-inline-title {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card-inline-rate {
+  display: flex;
+  align-items: center;
+  gap: 0.188rem;
+}
+
+.card-inline-rate div {
+  display: flex;
+  align-items: center;
+}
+
+.card-inline-rate span {
+  font-size: 0.8rem;
+}
+
+.rate-icon {
+  color: #fab818;
+  font-size: 1rem;
 }
 
 .arc-icon-text {

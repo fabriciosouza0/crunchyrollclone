@@ -3,14 +3,14 @@
         <span>{{sliderTitle}}</span>
     </div>
     <div class="line"></div>
-    <swiper #swiper [config]="config" id="inline">
+    <swiper (resize)="resizeLoading()" [config]="config" id="inline">
         <ng-template swiperSlide *ngFor="let item of sliderData">
             <div>
                 <a routerLink="/detalhes/{{mediaType == 'movie' ? 'movie' : 'tv'}}/{{item.id}}">
                     <div class="arc-card-inline">
                         <div class="card-inline-poster">
                             <img defaultImage="assets/images/loading.gif"
-                                lazyLoad="https://image.tmdb.org/t/p/w500/{{item.poster_path}}"
+                                lazyLoad="https://image.tmdb.org/t/p/w500{{item.poster_path}}"
                                 errorImage="assets/images/img-not-found.png" />
                         </div>
                         <div class="card-inline-title">{{item?.title ? item.title : item.name}}</div>
@@ -32,6 +32,14 @@
         <div class="title animated-background" style="height: 1.8rem; width: 280px;">
         </div>
         <div class="animated-background" style="width: 100%; height: 4px; margin-bottom: 0.5rem;"></div>
-        <div class="animated-background" style="width: 100%; height: 300px;"></div>
+
+        <div class=" flex" style="position: relative; width: 100%; height: 300px; gap: 5px;">
+            <div class="arc-card-inline loading" style="flex: 1 1 0" *ngFor="let n of slidesPerView">
+                <div class="card-inline-poster animated-background" style="height: 250px;"></div>
+                <div class=" card-inline-title animated-background" style="height: 1rem; width: 50%;"></div>
+                <div class="card-inline-rate animated-background"
+                    style="height: 0.8rem; width: 30%; margin-top: 0.5rem;"></div>
+            </div>
+        </div>
     </div>
 </ng-template>

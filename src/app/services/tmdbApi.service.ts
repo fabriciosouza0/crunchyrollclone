@@ -28,19 +28,35 @@ export class TmdbApiService {
   }
 
   details(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}`, {}).pipe(delay(500));
+    return this.request<any>(`${type}/${id}`, {})
+      .pipe(delay(500));
   }
 
   videos(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}/videos`, {}).pipe(delay(500), map(data => data.results[0]));
+    return this.request<any>(`${type}/${id}/videos`, {})
+      .pipe(
+        delay(500),
+        map(data => data.results[0])
+      );
   }
 
   related(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}/similar`, {}).pipe(delay(500), map(data => data.results));
+    return this.request<any>(`${type}/${id}/similar`, {})
+      .pipe(
+        delay(500),
+        map(data => {
+          data.results = data.results.filter((el: any) => el.id != id);
+          return data.results;
+        })
+      );
   }
 
   imdbId(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}/external_ids`, {}).pipe(delay(500), map(data => data.imdb_id));
+    return this.request<any>(`${type}/${id}/external_ids`, {})
+      .pipe(
+        delay(500),
+        map(data => data.imdb_id)
+      );
   }
 
   popularMovies(): Observable<any> {
@@ -65,5 +81,17 @@ export class TmdbApiService {
 
   seasons(id: number, seasonNumber: number) {
     return this.request<any>(`tv/${id}/season/${seasonNumber}`, {}).pipe(delay(500));
+  }
+
+  search(query: string, page: number) {
+    return this.request<any>('search/multi', { query: query, page: page })
+      .pipe(
+        map(data => {
+          data.results = data.results.filter((el: any) => el.media_type != 'person');
+          if (data.results.length === 0) return 'notfound';
+
+          return data;
+        })
+      );
   }
 }

@@ -8,6 +8,7 @@
                     *ngFor="let season of details.seasons;">
                     <input type="hidden" value="{{season.season_number}}">
                     <input type="hidden" value="{{season.name}}">
+                    <input type="hidden" value="{{season.episode_count}}">
                     {{season.name}}
                 </button>
             </div>
@@ -18,19 +19,22 @@
         <div *ngFor="let ep of episodes">
             <a href="https://embed.warezcdn.com/serie/{{imdbId$ |async}}/{{seasonNumber}}/{{ep.episode_number}}"
                 crossorigin="anonymous" target="_blank">
-                <div class="arc-ep">
-                    <div class="ep-poster">
+                <div class="arc-card-inline">
+                    <div class="card-inline-poster">
                         <img defaultImage="assets/images/loading.gif" lazyLoad="{{baseImgUrl + ep.still_path}}"
                             errorImage="assets/images/img-not-found.png" alt="">
-                        <div class="ep-rate arc-icon-text">
-                            <mat-icon inline="true" fontIcon="star" class="rate-icon"></mat-icon>
+                        <div class="ep-rate card-inline-rate arc-icon-text">
+                            <mat-icon class="rate-icon" inline="true" fontIcon="star" class="rate-icon"></mat-icon>
                             <div>
                                 <span>{{ep.vote_average | number: '1.1-1'}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="tv-title">{{tvName}}</div>
-                    <div class="ep-title">T{{seasonNumber}}/E{{ep.episode_number}} {{ep.name}}</div>
+                    <div class="card-inline-title">
+                        <span>T{{seasonNumber < 1 ? 'E' : seasonNumber}}/E{{ep.episode_number}}</span>
+                                {{ep.name}}
+                    </div>
                 </div>
             </a>
         </div>
@@ -39,8 +43,13 @@
 
 <ng-template #loadingSeasons>
     <div class="animated-background" style="width: 10rem; height: 3rem; margin-bottom: 0.825rem;"></div>
-    <section class="arc-eps animated-background" style="height: 20rem;"></section>
 </ng-template>
 <ng-template #loadingEps>
-    <section class="arc-eps animated-background" style="height: 20rem;"></section>
+    <section class="arc-eps">
+        <div class="arc-card-inline loading" *ngFor="let n of episodeCount">
+            <div class="card-inline-poster animated-background" style="height: 150px;"></div>
+            <div class="tv-title animated-background" style="height: 0.8rem;"></div>
+            <div class="card-inline-title animated-background" style="height: 0.95rem;"></div>
+        </div>
+    </section>
 </ng-template>

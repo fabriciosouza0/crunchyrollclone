@@ -37,17 +37,8 @@
   gap: 0.5rem;
 }
 
-.arc-ep {
-  padding: 0.325rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.arc-ep:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.ep-poster {
-  position: relative;
+.card-inline-title {
+  font-size: 0.87rem;
 }
 
 .ep-rate {
@@ -58,27 +49,9 @@
   padding: 3px 5px;
 }
 
-.ep-rate mat-icon {
-  color: #fab818;
-}
-
-.ep-rate span {
-  font-size: 0.8rem;
-}
-
-.ep-poster img {
-  object-fit: cover;
-  max-width: 100%;
-}
-
 .tv-title {
   font-size: 0.8rem;
   color: #a0a0a0;
-  margin-top: 0.5rem;
-}
-
-.ep-title {
-  font-size: 0.9rem;
   margin-top: 0.5rem;
 }
 

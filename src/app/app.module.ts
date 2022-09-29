@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CarouselModule } from './components/carousel/carousel.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -14,6 +13,10 @@ import { NavComponent } from './components/nav/nav.component';
 import { DestaqueComponent } from './components/destaque/destaque.component';
 import { TmdbApiService } from './services/tmdbApi.service';
 import { SearchComponent } from './components/pages/search/search.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CarouselModule } from './components/carousel/carousel.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
 import { LimboComponent } from './components/limbo/limbo.component';
 
 @NgModule({
@@ -30,7 +33,11 @@ import { LimboComponent } from './components/limbo/limbo.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
+    NgbPaginationModule,
+    LazyLoadImageModule,
     HttpClientModule,
     CarouselModule,
     AppRoutingModule
