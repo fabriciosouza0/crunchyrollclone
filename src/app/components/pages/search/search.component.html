@@ -27,8 +27,8 @@
             <ngb-pagination [collectionSize]="searchResults.total_pages" [(page)]="page"
                 (pageChange)="pageChange(query)" [maxSize]="5" [rotate]="true" [ellipses]="false"
                 [boundaryLinks]="true">
-                <ng-template ngbPaginationFirst>1</ng-template>
-                <ng-template ngbPaginationLast>{{searchResults.total_pages}}</ng-template>
+                <ng-template ngbPaginationFirst>Pri.</ng-template>
+                <ng-template ngbPaginationLast>Ult.</ng-template>
             </ngb-pagination>
         </div>
     </div>

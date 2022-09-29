@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TmdbApiService } from 'app/services/tmdbApi.service';
-import { filter, map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   popularMovies$!: Observable<any>;
   topRatedMovies$!: Observable<any>;
   familyMovies$!: Observable<any>;
@@ -15,18 +15,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   topRatedSeries$!: Observable<any>;
 
 
-  constructor(private tmdbService: TmdbApiService) { }
+  constructor(private tmdbApiService: TmdbApiService) { }
 
   ngOnInit(): void {
-    this.popularMovies$ = this.tmdbService.popularMovies();
-    this.topRatedMovies$ = this.tmdbService.topRatedMovies();
-    this.popularSeries$ = this.tmdbService.popularSeries();
-    this.topRatedSeries$ = this.tmdbService.topRatedSeries();
-    this.familyMovies$ = this.tmdbService.familyMovies();
-  }
-
-  ngAfterViewInit(): void {
-    document.getElementById('loader')?.classList.remove('loading');
+    this.popularMovies$ = this.tmdbApiService.popularMovies();
+    this.topRatedMovies$ = this.tmdbApiService.topRatedMovies();
+    this.popularSeries$ = this.tmdbApiService.popularSeries();
+    this.topRatedSeries$ = this.tmdbApiService.topRatedSeries();
+    this.familyMovies$ = this.tmdbApiService.familyMovies();
   }
 
 }

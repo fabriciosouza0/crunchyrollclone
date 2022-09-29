@@ -1,29 +1,19 @@
-<swiper class="swiper" id="highlights" [config]="config">
-    <ng-template swiperSlide>
-        <div class="arc-card-highlights">
-            <div class="card-highlights-content">
-                <a [routerLink]="['/']">
-                    <img src="assets/images/slide01.jpg" alt="">
-                </a>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template swiperSlide>
-        <div class="arc-card-highlights">
-            <div class="card-highlights-content">
-                <a [routerLink]="['/']">
-                    <img src="assets/images/slide01.jpg" alt="">
-                </a>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template swiperSlide>
-        <div class="arc-card-highlights">
-            <div class="card-highlights-content">
-                <a [routerLink]="['/']">
-                    <img src="assets/images/slide01.jpg" alt="">
-                </a>
-            </div>
-        </div>
-    </ng-template>
-</swiper>
+<div class="arc-slider" *ngIf="highligths$ | async as highligths; else loadingHighligths">
+    <div class="wrapper">
+        <swiper class="swiper" id="highlights" [config]="config">
+            <ng-template swiperSlide *ngFor="let highligth of highligths">
+                <div class="arc-card-highlights">
+                    <div class="card-highlights-content">
+                        <a routerLink="/detalhes/{{highligth?.title ? 'movie' : 'tv'}}/{{highligth.id}}">
+                            <img src="{{baseImgUrl}}w500{{highligth.poster_path}}" alt="">
+                        </a>
+                    </div>
+                </div>
+            </ng-template>
+        </swiper>
+    </div>
+</div>
+
+<ng-template #loadingHighligths>
+    <div class="animated-background" style="height: 38.54rem;"></div>
+</ng-template>
