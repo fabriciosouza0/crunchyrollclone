@@ -3,7 +3,7 @@
 }
 
 #search {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   margin-bottom: 0;
   width: 100%;
   padding: 0.5rem 0.325rem;
@@ -23,13 +23,6 @@
   font-size: 0.85rem;
 }
 
-.arc-results {
-  margin-top: 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
 .arc-pagination {
   margin-top: 1rem;
   display: flex;
@@ -38,24 +31,4 @@
 
 .page-link {
   padding: 0;
-}
-
-@media (min-width: 29.688rem) {
-  .arc-results {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* 850px */
-@media (min-width: 53.125rem) {
-  .arc-results {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* 1300px */
-@media (min-width: 81.25rem) {
-  .arc-results {
-    grid-template-columns: repeat(5, 1fr);
-  }
 }

@@ -97,14 +97,6 @@ export class TmdbApiService {
       );
   }
 
-  familyMovies(): Observable<any> {
-    return this.request<any>('discover/movie', { with_genres: 10751 })
-      .pipe(
-        delay(500),
-        map(data => data.results)
-      );
-  }
-
   popularSeries(): Observable<any> {
     return this.request<any>('tv/popular', { page: 1 })
       .pipe(
@@ -121,10 +113,24 @@ export class TmdbApiService {
       );
   }
 
+  discover(type: string, params: Object): Observable<any> {
+    return this.request<any>(`discover/${type}`, params)
+      .pipe(
+        map(data => data.results)
+      );
+  }
+
   seasons(id: number, seasonNumber: number) {
     return this.request<any>(`tv/${id}/season/${seasonNumber}`, {})
       .pipe(
         delay(500)
+      );
+  }
+
+  genres(type: string) {
+    return this.request<any>(`genre/${type}/list`, {})
+      .pipe(
+        map(data => data.genres)
       );
   }
 

@@ -1,15 +1,32 @@
 <div class="wrapper">
     <div class="arc-discover-nav">
-        <nav class="discover-nav">
-            <ul>
-
-            </ul>
-            <li>
-
-            </li>
-        </nav>
+        <div ngbDropdown class="d-inline-block">
+            <button type="button" class="btn-text btn-discover" id="menuTrigger"
+                ngbDropdownToggle>{{diplayPage}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="movies()">
+                    Filmes
+                </button>
+                <button ngbDropdownItem (click)="tv()">
+                    Séries
+                </button>
+                <button ngbDropdownItem (click)="animes()">
+                    Animes
+                </button>
+            </div>
+        </div>
+        <div ngbDropdown class="d-inline-block" *ngIf="genres$ | async as genres">
+            <button type="button" class="btn-text btn-discover" ngbDropdownToggle>{{genreName}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let genre of genres" (click)="setGenre($event)">
+                    <input type="hidden" value="{{genre.id}}" />
+                    <input type="hidden" value="{{genre.name}}" />
+                    {{genre.name}}
+                </button>
+            </div>
+        </div>
     </div>
-    <section class="discover-contet">
+    <section class="arc-discover-content">
         <router-outlet></router-outlet>
     </section>
 </div>

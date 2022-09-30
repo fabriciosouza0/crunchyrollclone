@@ -10,9 +10,9 @@ const discoverRoutes: Routes = [
     {
         path: '', title: 'DatMovie - Discover', component: DiscoverComponent,
         children: [
-            { path: 'movie', title: 'DatMovie - Discover Movies', component: MovieComponent },
-            { path: 'serie', title: 'DatMovie - Discover Series', component: TvComponent },
-            { path: 'anime', title: 'DatMovie - Discover Animes', component: AnimeComponent },
+            { path: 'filmes', title: 'DatMovie - Discover Movies', component: MovieComponent },
+            { path: 'series', title: 'DatMovie - Discover Series', component: TvComponent },
+            { path: 'animes', title: 'DatMovie - Discover Animes', component: AnimeComponent },
         ]
     }
 ];

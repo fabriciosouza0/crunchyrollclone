@@ -3,8 +3,7 @@
 }
 
 .temp-nav,
-.btn,
-.dropdown-item {
+.btn {
   width: fit-content;
   color: #a0a0a0;
   background-color: transparent;
@@ -12,23 +11,9 @@
 }
 
 .temp-nav:hover,
-.temp-nav:active,
-.dropdown-item:hover {
+.temp-nav:active {
   color: #fff;
   background-color: var(--bg-hover-color);
-}
-
-.dropdown-menu {
-  border-radius: 0px;
-  background-color: var(--bg-hover-color);
-}
-
-.dropdown-item {
-  width: 100%;
-}
-
-.dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .arc-eps {

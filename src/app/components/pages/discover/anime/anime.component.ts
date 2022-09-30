@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TmdbApiService } from 'app/services/tmdbApi.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-anime',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['anime.component.css']
 })
 export class AnimeComponent implements OnInit {
+  animes$!: Observable<any>;
+  genreId?: number;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private tmdbApiService: TmdbApiService) { }
 
   ngOnInit(): void {
-  }
+    this.route.queryParams.subscribe(params => {
+      if (params['genero'] && (params['genero'].trim() !== '')) this.genreId = params['genero'];
 
+      this.animes$ = this.tmdbApiService.discover('tv', { with_genres: `16,${this.genreId}` })
+    });
+  }
 }

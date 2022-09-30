@@ -40,8 +40,6 @@ export class DetailsComponent implements OnInit {
     this.details$ = this.tmdbApiService.details(this.mediaType, this.mediaId);
 
     this.related$ = this.tmdbApiService.related(this.mediaType, this.mediaId);
-
-    window.scroll({ top: 0, behavior: 'smooth' });
   }
 
   setImdbId(imdbId$: Observable<any>) {

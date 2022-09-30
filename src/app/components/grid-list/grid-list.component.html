@@ -1,0 +1,29 @@
+<div class="arc-grid" *ngIf="data$ | async as data; else loadingGridList" #arcResults>
+    <div *ngFor="let result of data">
+        <a routerLink="/detalhes/{{result?.title ? 'movie' : 'tv'}}/{{result.id}}">
+            <div class="arc-card-inline">
+                <div class="card-inline-poster">
+                    <img defaultImage="assets/images/loading.gif" lazyLoad="{{baseImgUrl}}w500{{result.poster_path}}"
+                        errorImage="assets/images/img-not-found.png" />
+                </div>
+                <div class="card-inline-title">{{result?.title ? result.title : result.name}}</div>
+                <div class="card-inline-rate">
+                    <mat-icon inline="true" fontIcon="star" class="rate-icon"></mat-icon>
+                    <div>
+                        <span>{{result.vote_average | number: '1.1-1'}}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<ng-template #loadingGridList>
+    <div class="arc-grid">
+        <div class="arc-card-inline loading" style="flex: 1 1 0" *ngFor="let n of listSize">
+            <div class="card-inline-poster animated-background" style="height: 250px;"></div>
+            <div class=" card-inline-title animated-background" style="height: 1rem; width: 50%;"></div>
+            <div class="card-inline-rate animated-background" style="height: 0.8rem; width: 30%; margin-top: 0.5rem;">
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +17,7 @@ import { CarouselModule } from './components/carousel/carousel.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
 import { LimboComponent } from './components/limbo/limbo.component';
+import { GridListModule } from './components/grid-list/grid-list.module';
 
 @NgModule({
   declarations: [
@@ -28,18 +28,18 @@ import { LimboComponent } from './components/limbo/limbo.component';
     NavComponent,
     DestaqueComponent,
     SearchComponent,
-    LimboComponent,
+    LimboComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     NgbPaginationModule,
     LazyLoadImageModule,
-    HttpClientModule,
     CarouselModule,
+    GridListModule,
     AppRoutingModule
   ],
   providers: [TmdbApiService],

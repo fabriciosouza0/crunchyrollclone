@@ -3,8 +3,8 @@
         <div ngbDropdown class="d-inline-block">
             <button type="button" class="btn btn-temp" id="menuTrigger" ngbDropdownToggle
                 #seasonMenu>{{seasonName}}</button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem [ngClass]="''" (click)="changeSeason($event, details.id, details.name)"
+            <div ngbDropdownMenu aria-labelledby="Temporadas">
+                <button ngbDropdownItem (click)="changeSeason($event, details.id, details.name)"
                     *ngFor="let season of details.seasons;">
                     <input type="hidden" value="{{season.season_number}}">
                     <input type="hidden" value="{{season.name}}">
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <section class="arc-eps" *ngIf="episodes$ |async as episodes; else loadingEps">
+    <section class="arc-eps" *ngIf="episodes$ | async as episodes; else loadingEps">
         <div *ngFor="let ep of episodes">
             <a href="https://embed.warezcdn.com/serie/{{imdbId$ |async}}/{{seasonNumber}}/{{ep.episode_number}}"
                 crossorigin="anonymous" target="_blank">

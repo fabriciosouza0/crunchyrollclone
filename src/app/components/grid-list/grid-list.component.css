@@ -1,0 +1,26 @@
+.arc-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 29.688rem) {
+  .arc-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 850px */
+@media (min-width: 53.125rem) {
+  .arc-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 1300px */
+@media (min-width: 81.25rem) {
+  .arc-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

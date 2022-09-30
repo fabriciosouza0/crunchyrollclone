@@ -23,7 +23,10 @@ import { ToastService } from 'app/services/toast.service';
     TvComponent,
     ToastsContainer
   ],
-  providers: [TmdbApiService, ToastService],
+  providers: [
+    TmdbApiService,
+    ToastService
+  ],
   imports: [
     CommonModule,
     MatIconModule,

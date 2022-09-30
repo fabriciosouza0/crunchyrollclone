@@ -1,0 +1,17 @@
+.wrapper {
+  min-height: 100vh;
+}
+
+.arc-discover-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.btn-discover {
+  padding: 0.7rem 1rem;
+}
+
+.arc-discover-content {
+  margin-top: 1.5rem;
+}

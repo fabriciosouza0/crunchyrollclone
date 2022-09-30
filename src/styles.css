@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: auto !important;
+}
+
 body {
   font-family: Lato, Helvetica Neue, helvetica, sans-serif;
   min-height: 100vh;
@@ -117,6 +121,31 @@ a {
 
 .card-inline-rate span {
   font-size: 0.8rem;
+}
+
+.dropdown-item {
+  width: fit-content;
+  color: #a0a0a0;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-item:hover {
+  color: #fff;
+  background-color: var(--bg-hover-color);
+}
+
+.dropdown-menu {
+  border-radius: 0px;
+  background-color: var(--bg-hover-color);
+}
+
+.dropdown-item {
+  width: 100%;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .rate-icon {

@@ -21,16 +21,20 @@ export class NavComponent implements OnInit {
     this.userPic = 'assets/images/user.png';
     this.userName = 'Derp_fp';
 
-    this.navigationEnd = this.route.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      const activeElements = document.getElementsByClassName('active');
+    this.navigationEnd = this.route.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        const activeElements = document.getElementsByClassName('active');
 
-      if (activeElements.length) {
-        const elem1 = activeElements[0];
-        const elem2 = activeElements[1];
+        if (activeElements.length) {
+          const elem1 = activeElements[0];
+          const elem2 = activeElements[1];
 
-        this.hide(elem1, elem2);
-      }
-    });
+          this.hide(elem1, elem2);
+        }
+      });
   }
 
   closeMenu(e: any, button: string, target: string, excepTarget: string) {

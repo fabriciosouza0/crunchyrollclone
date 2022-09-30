@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TmdbApiService } from 'app/services/tmdbApi.service';
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +15,8 @@ export class SearchComponent implements OnInit {
   searchForm!: FormGroup;
   page: number = 1;
   query!: string;
-  searchResults$?: Observable<any>;
+  search$!: Observable<any>;
+  searchResults$!: Observable<any>;
   baseImgUrl: string = environment.baseImgUrl;
 
   constructor(
@@ -46,15 +47,13 @@ export class SearchComponent implements OnInit {
       }
 
       // Caso esteja acessando a rota sem a queryParam 'query'
-      if (!(this.searchResults$ instanceof Observable)) {
-        this.searchResults$ = new Observable((subscriber) => {
+      if (!(this.search$ instanceof Observable)) {
+        this.search$ = new Observable((subscriber) => {
           subscriber.next([]);
           subscriber.complete();
         })
       }
     })
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   submit() {
@@ -65,9 +64,11 @@ export class SearchComponent implements OnInit {
   }
 
   search(query: string, page: number) {
-    this.searchResults$ = this.tmdbApiService.search(query, page);
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.search$ = this.tmdbApiService.search(query, page);
+    this.searchResults$ = this.tmdbApiService.search(query, page)
+      .pipe(
+        map(search => search = search.results)
+      );
   }
 
   pageChange(query: string): void {

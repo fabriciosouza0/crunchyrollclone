@@ -25,7 +25,7 @@ export class DetailsGeneralComponent implements OnInit {
   }
 
   copyLink() {
-    navigator.clipboard.writeText(window.location.href)
+    navigator.clipboard.writeText(window.location.href);
     this.toastService.show('Link copiado para área de transferência!', { classname: 'main-color text-light', delay: 2500 });
   }
 

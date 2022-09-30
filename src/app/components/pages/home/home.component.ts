@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     this.topRatedMovies$ = this.tmdbApiService.topRatedMovies();
     this.popularSeries$ = this.tmdbApiService.popularSeries();
     this.topRatedSeries$ = this.tmdbApiService.topRatedSeries();
-    this.familyMovies$ = this.tmdbApiService.familyMovies();
+    this.familyMovies$ = this.tmdbApiService.discover('movie', { with_genres: 10751 });
   }
 
 }
