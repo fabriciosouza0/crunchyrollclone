@@ -12,9 +12,8 @@ export class DiscoverComponent implements OnInit {
   genres$!: Observable<any>;
   genreId?: number;
   genreName: string = 'Generos';
-  diplayPage!: string;
+  displayPage!: string;
   page!: string;
-
 
   constructor(private router: Router, private tmdbApiService: TmdbApiService) { }
 
@@ -32,27 +31,29 @@ export class DiscoverComponent implements OnInit {
   }
 
   movies(): void {
-    this.genres$ = this.tmdbApiService.genres('movie');
-    this.diplayPage = 'Filmes';
-    this.page = this.diplayPage.toLowerCase();
+    this.moveTo('Filmes', 'movie', false);
+  }
+
+  tv(): void {
+    this.moveTo('Séries', 'tv', false);
+  }
+
+  animes(): void {
+    this.moveTo('Animes', 'tv', true);
+  }
+
+  private moveTo(displayPage: string, genresFor: string, anime: boolean): void {
+    this.displayPage = displayPage;
+    this.page = displayPage.toLowerCase().replace(/[é]/g, "e");
     this.genreId = undefined;
     this.genreName = 'Generos';
 
-    this.navigate(this.page, { genero: this.genreId });
-  }
+    if (!anime) {
+      this.genres$ = this.tmdbApiService.genres(genresFor);
+      this.navigate(this.page, { genero: this.genreId });
+      return;
+    }
 
-  tv() {
-    this.diplayPage = 'Series';
-    this.page = this.diplayPage.toLowerCase();
-    this.genres$ = this.tmdbApiService.genres('tv');
-    this.genreId = undefined;
-    this.genreName = 'Generos';
-    this.navigate(this.page, { genero: this.genreId });
-  }
-
-  animes() {
-    this.diplayPage = 'Animes';
-    this.page = this.diplayPage.toLowerCase();
     this.genres$ = this.tmdbApiService.genres('tv')
       .pipe(
         map(genres => {
@@ -61,22 +62,21 @@ export class DiscoverComponent implements OnInit {
           return genres;
         })
       );
-    this.genreId = undefined;
-    this.genreName = 'Generos';
-    this.navigate(this.page, { genero: this.genreId });
+
+    this.navigate(this.page, { genero: this.genreId })
   }
 
-  navigate(route: string, genre: Object) {
-    this.router.navigate(['/discover/' + route], { queryParams: genre });
-  }
-
-  setGenre(event: any) {
+  changeGenre(event: any): void {
     const genreId = event.target.children[0].value;
     const genreName = event.target.children[1].value;
     this.genreId = genreId;
     this.genreName = genreName;
 
     this.navigate(this.page, { genero: genreId })
+  }
+
+  navigate(route: string, genre: Object) {
+    this.router.navigate(['/discover/' + route], { queryParams: genre });
   }
 
 }
