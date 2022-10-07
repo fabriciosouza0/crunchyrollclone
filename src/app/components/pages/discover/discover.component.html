@@ -15,7 +15,7 @@
                 </button>
             </div>
         </div>
-        <div ngbDropdown class="d-inline-block" *ngIf="genres$ | async as genres">
+        <div ngbDropdown class="d-inline-block" *ngIf="genres$ | async as genres; else loadingGenres">
             <button type="button" class="btn-text btn-discover" ngbDropdownToggle>{{genreName}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let genre of genres" (click)="changeGenre($event)">
@@ -30,3 +30,7 @@
         <router-outlet></router-outlet>
     </section>
 </div>
+
+<ng-template #loadingGenres>
+    <div class="animated-background" style="width: 6.912rem; height: 2.598rem;"></div>
+</ng-template>

@@ -114,10 +114,7 @@ export class TmdbApiService {
   }
 
   discover(type: string, params: Object): Observable<any> {
-    return this.request<any>(`discover/${type}`, params)
-      .pipe(
-        map(data => data.results)
-      );
+    return this.request<any>(`discover/${type}`, params);
   }
 
   seasons(id: number, seasonNumber: number) {
@@ -130,6 +127,7 @@ export class TmdbApiService {
   genres(type: string) {
     return this.request<any>(`genre/${type}/list`, {})
       .pipe(
+        delay(500),
         map(data => data.genres)
       );
   }

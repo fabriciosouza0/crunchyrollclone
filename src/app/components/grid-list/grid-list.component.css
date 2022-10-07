@@ -5,6 +5,16 @@
   gap: 1rem;
 }
 
+.arc-load-more {
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.load-more {
+  padding: 0.7rem 1rem;
+}
+
 @media (min-width: 29.688rem) {
   .arc-grid {
     grid-template-columns: repeat(3, 1fr);

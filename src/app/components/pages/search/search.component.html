@@ -4,14 +4,7 @@
     </form>
     <div *ngIf="search$ | async as search; else loadingResults">
         <div *ngIf="search != 'notfound' else notFound" #arcResults>
-            <grid-list [data$]="searchResults$"></grid-list>
-        </div>
-        <div class="arc-pagination" *ngIf="search?.total_pages > 1">
-            <ngb-pagination [collectionSize]="search.total_pages" [(page)]="page" (pageChange)="pageChange(query)"
-                [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
-                <ng-template ngbPaginationFirst>Pri.</ng-template>
-                <ng-template ngbPaginationLast>Ult.</ng-template>
-            </ngb-pagination>
+            <grid-list [data$]="searchResults$" [loadMoreConfig]="loadMoreConfig"></grid-list>
         </div>
     </div>
 </div>

@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { TmdbApiService } from 'app/services/tmdbApi.service';
-import { filter, map, Observable } from 'rxjs';
+import { filter, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-discover',
   templateUrl: './discover.component.html',
   styleUrls: ['./discover.component.css']
 })
-export class DiscoverComponent implements OnInit {
+export class DiscoverComponent implements OnInit, OnDestroy {
+  routerSub!: Subscription;
   genres$!: Observable<any>;
   genreId?: number;
   genreName: string = 'Generos';
@@ -20,35 +21,38 @@ export class DiscoverComponent implements OnInit {
   ngOnInit(): void {
     this.movies();
 
-    this.router.events
+    this.routerSub = this.router.events
       .pipe(
         filter((events: Event): events is RouterEvent => events instanceof NavigationEnd)
       )
       .subscribe(navigation => {
         const url = navigation.url;
-        if (url === '/discover') this.movies();
+        if (url === '/discover') {
+          this.movies();
+          return;
+        }
       });
   }
 
   movies(): void {
-    this.moveTo('Filmes', 'movie', false);
+    this.moveTo('Filmes', 'movie', false, false);
   }
 
   tv(): void {
-    this.moveTo('Séries', 'tv', false);
+    this.moveTo('Séries', 'tv', false, true);
   }
 
   animes(): void {
-    this.moveTo('Animes', 'tv', true);
+    this.moveTo('Animes', 'tv', true, false);
   }
 
-  private moveTo(displayPage: string, genresFor: string, anime: boolean): void {
+  private moveTo(displayPage: string, genresFor: string, isAnime: boolean, isTv: boolean): void {
     this.displayPage = displayPage;
     this.page = displayPage.toLowerCase().replace(/[é]/g, "e");
     this.genreId = undefined;
     this.genreName = 'Generos';
 
-    if (!anime) {
+    if (!isAnime && !isTv) {
       this.genres$ = this.tmdbApiService.genres(genresFor);
       this.navigate(this.page, { genero: this.genreId });
       return;
@@ -77,6 +81,10 @@ export class DiscoverComponent implements OnInit {
 
   navigate(route: string, genre: Object) {
     this.router.navigate(['/discover/' + route], { queryParams: genre });
+  }
+
+  ngOnDestroy(): void {
+    this.routerSub.unsubscribe();
   }
 
 }

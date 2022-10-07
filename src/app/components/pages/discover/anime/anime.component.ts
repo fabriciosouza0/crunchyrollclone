@@ -11,14 +11,28 @@ import { Observable } from 'rxjs';
 export class AnimeComponent implements OnInit {
   animes$!: Observable<any>;
   genreId?: number;
+  loadMoreConfig!: Object;
 
   constructor(private route: ActivatedRoute, private tmdbApiService: TmdbApiService) { }
 
   ngOnInit(): void {
+    this.setLoadMoreConfig();
+
     this.route.queryParams.subscribe(params => {
       if (params['genero'] && (params['genero'].trim() !== '')) this.genreId = params['genero'];
-
-      this.animes$ = this.tmdbApiService.discover('tv', { with_genres: `16,${this.genreId}` })
+      this.animes$ = this.tmdbApiService.discover('tv', { with_genres: `16,${this.genreId}` });
+      this.setLoadMoreConfig();
     });
   }
+
+  private setLoadMoreConfig(): void {
+    this.loadMoreConfig = {
+      method: 'discover',
+      type: 'tv',
+      params: {
+        with_genres: `16,${this.genreId}`
+      }
+    }
+  }
+
 }

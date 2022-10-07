@@ -1,22 +1,30 @@
-<div class="arc-grid" *ngIf="data$ | async as data; else loadingGridList" #arcResults>
-    <div *ngFor="let result of data">
-        <a routerLink="/detalhes/{{result?.title ? 'movie' : 'tv'}}/{{result.id}}">
-            <div class="arc-card-inline">
-                <div class="card-inline-poster">
-                    <img defaultImage="assets/images/loading.gif" lazyLoad="{{baseImgUrl}}w500{{result.poster_path}}"
-                        errorImage="assets/images/img-not-found.png" />
-                </div>
-                <div class="card-inline-title">{{result?.title ? result.title : result.name}}</div>
-                <div class="card-inline-rate">
-                    <mat-icon inline="true" fontIcon="star" class="rate-icon"></mat-icon>
-                    <div>
-                        <span>{{result.vote_average | number: '1.1-1'}}</span>
+<div *ngIf="data$ | async as data; else loadingGridList">
+    <div class="arc-grid" #arcitems>
+        <div *ngFor="let item of data.results">
+            <a routerLink="/detalhes/{{item?.title ? 'movie' : 'tv'}}/{{item.id}}">
+                <div class="arc-card-inline">
+                    <div class="card-inline-poster">
+                        <img defaultImage="assets/images/loading.gif" lazyLoad="{{baseImgUrl}}w500{{item.poster_path}}"
+                            errorImage="assets/images/img-not-found.png" />
+                    </div>
+                    <div class="card-inline-title">{{item?.title ? item.title : item.name}}</div>
+                    <div class="card-inline-rate">
+                        <mat-icon inline="true" fontIcon="star" class="rate-icon"></mat-icon>
+                        <div>
+                            <span>{{item.vote_average | number: '1.1-1'}}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
+    </div>
+    <div class="arc-load-more" *ngIf="(data.total_pages > 1) && (data.page !== data.total_pages)">
+        <button class="btn-text load-more" (click)="loadMore()">
+            Carregar Mais
+        </button>
     </div>
 </div>
+
 <ng-template #loadingGridList>
     <div class="arc-grid">
         <div class="arc-card-inline loading" style="flex: 1 1 0" *ngFor="let n of listSize">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TmdbApiService } from 'app/services/tmdbApi.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     this.topRatedMovies$ = this.tmdbApiService.topRatedMovies();
     this.popularSeries$ = this.tmdbApiService.popularSeries();
     this.topRatedSeries$ = this.tmdbApiService.topRatedSeries();
-    this.familyMovies$ = this.tmdbApiService.discover('movie', { with_genres: 10751 });
+    this.familyMovies$ = this.tmdbApiService.discover('movie', { with_genres: 10751 }).pipe(map(data => data.results));
   }
 
 }

@@ -18,6 +18,7 @@ export class SearchComponent implements OnInit {
   search$!: Observable<any>;
   searchResults$!: Observable<any>;
   baseImgUrl: string = environment.baseImgUrl;
+  loadMoreConfig!: Object;
 
   constructor(
     private tmdbApiService: TmdbApiService,
@@ -65,13 +66,15 @@ export class SearchComponent implements OnInit {
 
   search(query: string, page: number) {
     this.search$ = this.tmdbApiService.search(query, page);
-    this.searchResults$ = this.tmdbApiService.search(query, page)
-      .pipe(
-        map(search => search = search.results)
-      );
+    this.searchResults$ = this.tmdbApiService.search(query, page);
+    this.setLoadMoreConfig();
   }
 
-  pageChange(query: string): void {
-    this.router.navigate((['/search']), { queryParams: { query: query, page: this.page } });
+  private setLoadMoreConfig(): void {
+    this.loadMoreConfig = {
+      method: 'search',
+      query: this.query,
+      params: {}
+    }
   }
 }

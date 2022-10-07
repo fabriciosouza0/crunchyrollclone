@@ -15,7 +15,6 @@ import { SearchComponent } from './components/pages/search/search.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselModule } from './components/carousel/carousel.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
 import { LimboComponent } from './components/limbo/limbo.component';
 import { GridListModule } from './components/grid-list/grid-list.module';
 
@@ -36,7 +35,6 @@ import { GridListModule } from './components/grid-list/grid-list.module';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    NgbPaginationModule,
     LazyLoadImageModule,
     CarouselModule,
     GridListModule,
