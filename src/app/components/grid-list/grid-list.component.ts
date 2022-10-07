@@ -13,11 +13,12 @@ export class GridListComponent implements OnInit {
   @ViewChild('arcitems') arcItems!: ElementRef;
   @Input() data$!: Observable<any>;
   @Input() loadMoreConfig!: any;
-  page: number = 2;
+  page: number = 1;
   loadMoreSub?: Subscription;
   baseImgUrl: string = environment.baseImgUrl;
   listSize!: Array<number>;
   listSub!: Subscription;
+  totalPages!: number;
 
   constructor(private router: Router, private renderer: Renderer2, private tmdbApiService: TmdbApiService) { }
 
@@ -26,9 +27,14 @@ export class GridListComponent implements OnInit {
 
     this.listSub = this.data$
       .pipe(
-        map(data => data = Array<number>(data.results.length))
+        map(data => {
+          this.totalPages = data.total_pages;
+          return data = Array<number>(data.results.length);
+        })
       )
-      .subscribe(listSize => this.listSize = listSize);
+      .subscribe(listSize => {
+        this.listSize = listSize;
+      });
 
     this.data$ = this.data$.pipe(delay(500));
   }
@@ -37,8 +43,16 @@ export class GridListComponent implements OnInit {
     this.listSub?.unsubscribe();
   }
 
-  loadMore(): void {
+  loadMore(event: any): void {
+    this.page += 1;
     this.loadMoreConfig.params.page = this.page;
+    // console.log(this.page, this.totalPages)
+
+    if (this.page > this.totalPages) {
+      event.target.remove();
+
+      return;
+    }
 
     if ((this.loadMoreConfig.method === 'discover') && (this.loadMoreConfig?.type && this.loadMoreConfig?.params)) {
       this.loadMoreSub = this.tmdbApiService.discover(this.loadMoreConfig.type, this.loadMoreConfig?.params).subscribe(data => {
@@ -47,8 +61,6 @@ export class GridListComponent implements OnInit {
         });
         this.loadMoreSub?.unsubscribe();
       });
-
-      this.page += 1;
 
       return;
     }
@@ -61,8 +73,6 @@ export class GridListComponent implements OnInit {
         });
         this.loadMoreSub?.unsubscribe();
       });
-
-      this.page += 1;
     }
   }
 
@@ -71,12 +81,17 @@ export class GridListComponent implements OnInit {
     detailsLink.addEventListener('click', (event: any) => {
       event.stopPropagation();
       event.preventDefault();
-      const baseUri = event.path[3]?.baseURI;
-      const route = event.path[3]?.href.replace(baseUri, '');
 
-      if (route) this.router.navigate([`/${route}`]);
+      const baseUri = event.path[3]?.baseURI;
+
+      if (event.path[3]?.href) {
+        const route = event.path[3].href.replace(baseUri, '');
+
+        this.router.navigate([`/${route}`]);
+      }
     });
 
+    const arc = this.renderer.createElement('div');
     const arcCard = this.renderer.createElement('div');
     const cardPoster = this.renderer.createElement('div');
     const posterImage = this.renderer.createElement('img');
@@ -109,8 +124,9 @@ export class GridListComponent implements OnInit {
     this.renderer.appendChild(arcCard, cardTitle);
     this.renderer.appendChild(arcCard, cardRate);
     this.renderer.appendChild(detailsLink, arcCard);
+    this.renderer.appendChild(arc, detailsLink);
 
-    this.renderer.appendChild(eleRef.nativeElement, detailsLink);
+    this.renderer.appendChild(eleRef.nativeElement, arc);
   }
 
 }

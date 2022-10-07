@@ -18,8 +18,8 @@
             </a>
         </div>
     </div>
-    <div class="arc-load-more" *ngIf="(data.total_pages > 1) && (data.page !== data.total_pages)">
-        <button class="btn-text load-more" (click)="loadMore()">
+    <div class="arc-load-more" *ngIf="(data.total_pages > 1 && !(page > (totalPages - 1)))">
+        <button class="btn-text load-more" (click)="loadMore($event)">
             Carregar Mais
         </button>
     </div>
