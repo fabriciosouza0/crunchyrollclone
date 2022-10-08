@@ -7,7 +7,7 @@
 </div>
 <div class="wrapper">
     <section class="arc-details-top flex">
-        <details-general [mediaType]="mediaType" [details$]="details$"></details-general>
+        <details-general [mediaType]="mediaType ? mediaType : 'movie'" [details$]="details$"></details-general>
         <details-trailer (imdbId)="setImdbId($event)"></details-trailer>
     </section>
 

@@ -14,7 +14,7 @@ export class DetailsComponent implements OnInit {
   details$!: Observable<any>;
   related$!: Observable<any>;
   imdbId$!: Observable<any>;
-  mediaType!: string;
+  mediaType?: string;
   mediaId!: number;
   baseImgUrl: string = environment.baseImgUrl;
 
@@ -37,9 +37,9 @@ export class DetailsComponent implements OnInit {
   }
 
   private loadDetails(): void {
-    this.details$ = this.tmdbApiService.details(this.mediaType, this.mediaId);
+    this.details$ = this.tmdbApiService.details(this.mediaType ? this.mediaType : 'movie', this.mediaId);
 
-    this.related$ = this.tmdbApiService.related(this.mediaType, this.mediaId);
+    this.related$ = this.tmdbApiService.related(this.mediaType ? this.mediaType : 'movie', this.mediaId);
   }
 
   setImdbId(imdbId$: Observable<any>) {
