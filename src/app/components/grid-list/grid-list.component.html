@@ -1,4 +1,4 @@
-<div *ngIf="data$ | async as data; else loadingGridList">
+<div *ngIf="data$ | async; else loadingGridList">
     <div class="arc-grid" #arcitems>
         <div *ngFor="let item of data.results">
             <a routerLink="/detalhes/{{item?.title ? 'movie' : 'tv'}}/{{item.id}}">
@@ -24,7 +24,6 @@
         </button>
     </div>
 </div>
-
 <ng-template #loadingGridList>
     <div class="arc-grid">
         <div class="arc-card-inline loading" style="flex: 1 1 0" *ngFor="let n of listSize">

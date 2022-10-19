@@ -2,24 +2,30 @@
 <div class="arc-content">
     <!-- Section de Filmes -->
     <section class="wrapper">
-        <slider-inline [mediaType]="'movie'" [sliderTitle]="'Recomendações'" [sliderData$]="popularMovies$">
+        <slider-inline class="recommendations" [mediaType]="'movie'" [sliderTitle]="'Recomendações'"
+            [sliderData$]="popularMovies$">
         </slider-inline>
-        <slider-inline [mediaType]="'movie'" [sliderTitle]="'Favoritos da Crítica'" [sliderData$]="topRatedMovies$">
+        <slider-inline class="critcs-love" [mediaType]="'movie'" [sliderTitle]="'Favoritos da Crítica'"
+            [sliderData$]="topRatedMovies$">
         </slider-inline>
-        <slider-inline [mediaType]="'movie'" [sliderTitle]="'Reúna a Família'" [sliderData$]="familyMovies$">
+        <slider-inline class="family" [mediaType]="'movie'" [sliderTitle]="'Reúna a Família'"
+            [sliderData$]="familyMovies$">
         </slider-inline>
     </section>
     <!-- Fim -->
 
     <!-- Destaque -->
-    <app-destaque [emphasisTitle]="'Jujutsu Kaisen'" [emphasisImg]="'assets/images/slide01.jpg'"></app-destaque>
+    <app-destaque class="highligth">
+    </app-destaque>
     <!-- Fim -->
 
     <!-- Section de Séries -->
     <section class="wrapper">
-        <slider-inline [mediaType]="'tv'" [sliderTitle]="'Séries para Maratonar'" [sliderData$]="popularSeries$">
+        <slider-inline class="top-tv" [mediaType]="'tv'" [sliderTitle]="'Séries para Maratonar'"
+            [sliderData$]="popularSeries$">
         </slider-inline>
-        <slider-inline [mediaType]="'tv'" [sliderTitle]="'Séries Marcantes'" [sliderData$]="topRatedSeries$">
+        <slider-inline class="memorable-tv" [mediaType]="'tv'" [sliderTitle]="'Séries Marcantes'"
+            [sliderData$]="topRatedSeries$">
         </slider-inline>
     </section>
     <!-- Fim -->

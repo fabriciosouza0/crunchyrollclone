@@ -12,16 +12,15 @@ import { TvComponent } from './tv/tv.component';
 import { DetailsComponent } from './details.component';
 import { DetailsTrailerComponent } from './details-trailer/details-trailer.component';
 import { DetailsGeneralComponent } from './details-general/details-general.component';
-import { ToastsContainer } from './details-general/toasts-container/toasts-container.component';
 import { ToastService } from 'app/services/toast.service';
+import { ToastsModule } from 'app/components/toasts/toasts.module';
 
 @NgModule({
   declarations: [
     DetailsComponent,
     DetailsGeneralComponent,
     DetailsTrailerComponent,
-    TvComponent,
-    ToastsContainer
+    TvComponent
   ],
   providers: [
     TmdbApiService,
@@ -35,7 +34,8 @@ import { ToastService } from 'app/services/toast.service';
     LazyLoadImageModule,
     RouterModule,
     NgbToastModule,
-    DetailsRoutingModule
+    DetailsRoutingModule,
+    ToastsModule
   ]
 })
 export class DetailsModule { }

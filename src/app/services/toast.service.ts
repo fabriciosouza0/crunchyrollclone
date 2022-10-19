@@ -5,6 +5,7 @@ import { Injectable, TemplateRef } from '@angular/core';
 })
 export class ToastService {
   toasts: any[] = [];
+
   constructor() { }
 
   show(textOrTpl: string | TemplateRef<any>, options: any = {}) {

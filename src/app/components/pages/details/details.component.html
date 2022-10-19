@@ -1,3 +1,4 @@
+<toasts aria-live="polite" aria-atomic="true"></toasts>
 <div class="backdrop" *ngIf="details$ | async as details; else loadingBackdrop" [ngStyle]="{
     '--backdrop-img': 'url('+ baseImgUrl + 'original/' + details.backdrop_path +')'
 }">

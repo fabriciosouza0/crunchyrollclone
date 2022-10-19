@@ -1,26 +1,31 @@
-<section class="arc-emphasis">
-    <div class="container">
+<section class="arc-emphasis" *ngIf="highlight$ | async as highlight; else loadingHighligth">
+    <div class="container wrapper">
         <div class="emphasis-img">
-            <a routerLink="/">
-                <img [src]="emphasisImg" alt="{{emphasisTitle}}">
+            <a [routerLink]="'/detalhes/' + mediaType + '/' + highlight.id">
+                <img draggable="false"
+                    [src]="highlight?.poster_path ? baseImgUrl + 'w500' + highlight.poster_path: '/assets/images/img-not-found.png'"
+                    alt="{{highlight?.title ? highlight.title : highlight.name}}">
             </a>
         </div>
         <div class="emphasis-content">
             <h1 class="title">
-                {{emphasisTitle}}
+                {{highlight?.title ? highlight.title : highlight.name}}
             </h1>
             <h4 class="description">
-                Uma série sobrenatural de horror que acompanha a vida de Yuji Itadori, um adolescente que se envolve em
-                uma batalha épica entre exorcistas e poderosas maldições e acaba sendo possuído
+                {{highlight?.overview ? highlight.overview : 'Nenhuma descrição disponível ;('}}
             </h4>
             <div class="emphasis-buttons">
-                <button>
+                <a class="button" [routerLink]="'/detalhes/' + mediaType + '/' + highlight.id">
                     <mat-icon [inline]="true" fontIcon="play_arrow"></mat-icon>
-                </button>
-                <button>
+                </a>
+                <button (click)="copyLink('/detalhes/' + mediaType + '/' + highlight.id)">
                     <mat-icon [inline]="true" fontIcon="share"></mat-icon>
                 </button>
             </div>
         </div>
     </div>
 </section>
+
+<ng-template #loadingHighligth>
+    <section class="animated-background" style="height: 424px;"></section>
+</ng-template>

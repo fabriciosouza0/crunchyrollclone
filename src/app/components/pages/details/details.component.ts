@@ -29,6 +29,13 @@ export class DetailsComponent implements OnInit {
     if (!this.route.snapshot.paramMap.has('id') || !this.route.snapshot.paramMap.has('type')) this.router.navigate(['**']);
 
     this.route.params.subscribe(params => {
+      if (!(params['type'] === 'movie')) {
+        if (!(params['type'] === 'tv')) {
+          this.router.navigate(['/']);
+          return;
+        }
+      }
+
       this.mediaType = params['type'];
       this.mediaId = params['id'];
 
@@ -38,7 +45,6 @@ export class DetailsComponent implements OnInit {
 
   private loadDetails(): void {
     this.details$ = this.tmdbApiService.details(this.mediaType ? this.mediaType : 'movie', this.mediaId);
-
     this.related$ = this.tmdbApiService.related(this.mediaType ? this.mediaType : 'movie', this.mediaId);
   }
 

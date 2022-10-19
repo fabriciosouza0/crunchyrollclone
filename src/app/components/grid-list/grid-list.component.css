@@ -15,6 +15,10 @@
   padding: 0.7rem 1rem;
 }
 
+.routerlink {
+  cursor: pointer;
+}
+
 @media (min-width: 29.688rem) {
   .arc-grid {
     grid-template-columns: repeat(3, 1fr);

@@ -50,20 +50,23 @@ img {
   gap: 0.5rem;
 }
 
-button {
+button,
+a.button {
   width: 2.5rem;
   height: 2.5rem;
   line-height: 2.5rem;
   border-radius: 50%;
   text-align: center;
   font-size: 1.5rem;
+  color: #000;
   background-color: #fab818;
   opacity: 1;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-button:hover {
+button:hover,
+a.button:hover {
   opacity: 0.8;
 }
 

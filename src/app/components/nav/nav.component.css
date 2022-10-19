@@ -17,6 +17,7 @@
   justify-content: space-between;
   align-items: stretch;
   height: 3.75rem;
+  padding: 0rem 0rem;
   margin: 0 auto;
 }
 
@@ -152,6 +153,7 @@ button.active {
 
 .c-user-logout button {
   width: 100%;
+  color: #000;
   padding: 0.5rem 0rem;
   text-align: center;
   background-color: #fab818;
@@ -203,39 +205,24 @@ button.active {
   width: 100vw;
 }
 
-/* 280px */
-@media (min-width: 17.5rem) {
-  .nav-arc {
-    padding: 0rem 0rem;
-  }
+.mobile-menu-arc,
+.arc-nav-user {
+  display: none;
+}
 
-  .nav-brand {
-    padding: 0rem 1.125rem;
-  }
+.mobile-menu-arc.active,
+.arc-nav-user.active {
+  display: flex !important;
+}
 
-  .mobile-menu-arc,
-  .arc-nav-user {
-    display: none;
-  }
+.mobile-menu-arc .nav-links {
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--bg-hover-color);
+}
 
-  .mobile-menu-arc.active,
-  .arc-nav-user.active {
-    display: flex !important;
-  }
-
-  .mobile-menu-arc .nav-links {
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--bg-hover-color);
-  }
-
-  .btn-menu-arc {
-    display: flex;
-  }
-
-  .nav-bar-left {
-    flex-direction: row-reverse;
-  }
+.nav-bar-left {
+  flex-direction: row-reverse;
 }
 
 /* 570px */

@@ -17,6 +17,7 @@ import { CarouselModule } from './components/carousel/carousel.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { LimboComponent } from './components/limbo/limbo.component';
 import { GridListModule } from './components/grid-list/grid-list.module';
+import { ToastsModule } from './components/toasts/toasts.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GridListModule } from './components/grid-list/grid-list.module';
     LazyLoadImageModule,
     CarouselModule,
     GridListModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastsModule
   ],
   providers: [TmdbApiService],
   bootstrap: [AppComponent]
