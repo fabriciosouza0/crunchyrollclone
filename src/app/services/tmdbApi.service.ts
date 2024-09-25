@@ -1,147 +1,124 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
-import { delay, map, Observable } from 'rxjs';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "environments/environment";
+import { map, Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TmdbApiService {
-  private readonly baseApiUrl = environment.baseApiUrl;
-  private readonly apiKey = environment.apiKey;
+  private readonly baseApiUrl: string = environment.baseApiUrl;
+  private readonly apiKey: string = environment.apiKey;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private request<T>(endPoint: string, params: any): Observable<T> {
-    let url = this.baseApiUrl + endPoint;
+    let url: string = this.baseApiUrl + endPoint;
     let httpParams = new HttpParams();
 
-    httpParams = httpParams.set('api_key', this.apiKey);
-    httpParams = httpParams.set('language', 'pt-BR');
+    httpParams = httpParams.set("api_key", this.apiKey);
+    httpParams = httpParams.set("language", "pt-BR");
 
-    Object.keys(params).forEach(key => {
-      let value = params[key];
+    Object.keys(params).forEach((key: string): void => {
+      let value: any = params[key];
       httpParams = httpParams.set(key, value);
-    })
+    });
 
     return this.http.get<T>(url, { params: httpParams });
   }
 
   details(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}`, {})
-      .pipe(delay(500));
+    return this.request<any>(`${type}/${id}`, {});
   }
 
   videos(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}/videos`, {})
-      .pipe(
-        delay(500),
-        map(data => data.results[0])
-      );
+    return this.request<any>(`${type}/${id}/videos`, {}).pipe(
+      map((data: any): any => data.results[0])
+    );
   }
 
   related(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}/similar`, {})
-      .pipe(
-        delay(500),
-        map(data => {
-          data.results = data.results.filter((el: any) => el.id != id);
-          return data.results;
-        })
-      );
+    return this.request<any>(`${type}/${id}/similar`, {}).pipe(
+      map((data: any): any => {
+        data.results = data.results.filter((el: any): boolean => el.id != id);
+        return data.results;
+      })
+    );
   }
 
   imdbId(type: string, id: number): Observable<any> {
-    return this.request<any>(`${type}/${id}/external_ids`, {})
-      .pipe(
-        delay(500),
-        map(data => data.imdb_id)
-      );
+    return this.request<any>(`${type}/${id}/external_ids`, {}).pipe(
+      map((data: any): any => data.imdb_id)
+    );
   }
 
-  highligths() {
-    const endPoints = [
-      'movie/top_rated',
-      'tv/top_rated'
-    ]
-    const index = Math.floor(Math.random() * 2);
-    const rEndPoint = endPoints[index];
+  highligths(): Observable<any> {
+    const endPoints: string[] = ["movie/top_rated", "tv/top_rated"];
+    const index: number = Math.floor(Math.random() * 2);
+    const rEndPoint: string = endPoints[index];
 
-    return this.request<any>(rEndPoint, { page: 1 })
-      .pipe(
-        delay(500),
-        map(data => {
-          data.results = data.results.sort(() => Math.random() - 0.5);
-          let highligths: Array<any> = [];
-          for (let i = 0; i < 4; i++) highligths.push(data.results[i]);
+    return this.request<any>(rEndPoint, { page: 1 }).pipe(
+      map((data: any): any => {
+        data.results = data.results.sort((): number => Math.random() - 0.5);
+        let highligths: Array<any> = [];
 
-          data.results = highligths;
-          return data.results;
-        })
-      );
+        for (let i: number = 0; i < 4; i++) highligths.push(data.results[i]);
+
+        data.results = highligths;
+        return data.results;
+      })
+    );
   }
 
   popularMovies(): Observable<any> {
-    return this.request<any>('movie/popular', { page: 1 })
-      .pipe(
-        delay(500),
-        map(data => data.results)
-      );
+    return this.request<any>("movie/popular", { page: 1 }).pipe(
+      map((data: any): any => data.results)
+    );
   }
 
   topRatedMovies(): Observable<any> {
-    return this.request<any>('movie/top_rated', { page: 1 })
-      .pipe(
-        delay(500),
-        map(data => data.results)
-      );
+    return this.request<any>("movie/top_rated", { page: 1 }).pipe(
+      map((data: any): any => data.results)
+    );
   }
 
   popularSeries(): Observable<any> {
-    return this.request<any>('tv/popular', { page: 1 })
-      .pipe(
-        delay(500),
-        map(data => data.results)
-      );
+    return this.request<any>("tv/popular", { page: 1 }).pipe(
+      map((data: any): any => data.results)
+    );
   }
 
   topRatedSeries(): Observable<any> {
-    return this.request<any>('tv/top_rated', { page: 1 })
-      .pipe(
-        delay(500),
-        map(data => data.results)
-      );
+    return this.request<any>("tv/top_rated", { page: 1 }).pipe(
+      map((data: any): any => data.results)
+    );
   }
 
   discover(type: string, params: Object): Observable<any> {
     return this.request<any>(`discover/${type}`, params);
   }
 
-  seasons(id: number, seasonNumber: number) {
-    return this.request<any>(`tv/${id}/season/${seasonNumber}`, {})
-      .pipe(
-        delay(500)
-      );
+  seasons(id: number, seasonNumber: number): Observable<any> {
+    return this.request<any>(`tv/${id}/season/${seasonNumber}`, {});
   }
 
-  genres(type: string) {
-    return this.request<any>(`genre/${type}/list`, {})
-      .pipe(
-        delay(500),
-        map(data => data.genres)
-      );
+  genres(type: string): Observable<any> {
+    return this.request<any>(`genre/${type}/list`, {}).pipe(
+      map((data: any): any => data.genres)
+    );
   }
 
-  search(query: string, page: number) {
-    return this.request<any>('search/multi', { query: query, page: page })
-      .pipe(
-        map(data => {
-          const totalResults = data.results.length;
-          if (totalResults === 0) return 'notfound';
-          data.results = data.results.filter((el: any) => el.media_type !== 'person');
+  search(query: string, page: number): Observable<any> {
+    return this.request<any>("search/multi", { query: query, page: page }).pipe(
+      map((data: any): any => {
+        const totalResults: any = data.results.length;
+        if (totalResults === 0) return "notfound";
+        data.results = data.results.filter(
+          (el: any): boolean => el.media_type !== "person"
+        );
 
-          return data;
-        })
-      );
+        return data;
+      })
+    );
   }
 }
