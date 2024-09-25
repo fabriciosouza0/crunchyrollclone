@@ -16,7 +16,15 @@ Faça o clone do repositório para sua máquina local utilizando o comando:
 ```bash
 git clone https://github.com/seu-usuario/crunchyrollclone.git
 ```
-### 2. Instale as Dependências
+
+### 2. Instale o Angular CLI
+Se você ainda não possui o Angular CLI instalado, execute o seguinte comando para instalá-lo globalmente:
+
+```bash
+npm install -g @angular/cli
+```
+
+### 3. Instale as Dependências
 
 Navegue até o diretório do projeto e execute o seguinte comando para instalar todas as dependências:
 
@@ -24,7 +32,7 @@ Navegue até o diretório do projeto e execute o seguinte comando para instalar 
 npm install
 ```
 
-### 3. Crie dois arquivos no diretório src/environments/:
+### 4. Crie dois arquivos no diretório src/environments/:
 #### environment.ts para o ambiente de desenvolvimento
 #### environment.prod.ts para o ambiente de produção
 #### Parao o ambiente de desenvolvimento, utilize:
@@ -49,7 +57,7 @@ export const environment = {
 };
 ```
 
-### 4. Obtenha uma API Key do The Movie Database (TMDb)
+### 5. Obtenha uma API Key do The Movie Database (TMDb)
 Para que o projeto funcione corretamente, você precisará de uma API Key do The Movie Database (TMDb). Siga os passos abaixo para conseguir uma:
 
 Crie uma conta no TMDb se ainda não tiver uma.
@@ -57,7 +65,7 @@ Após fazer login, vá até a seção de API.
 Solicite uma API Key.
 Copie o Token JWT fornecido e cole no campo apiKey dos arquivos environment.ts e environment.prod.ts.
 
-### 5. Executando o Projeto
+### 6. Executando o Projeto
 Após configurar os arquivos de ambiente e instalar as dependências, você pode iniciar o servidor de desenvolvimento com o seguinte comando:
 
 ```bash
