@@ -1,39 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { TmdbApiService } from 'app/services/tmdbApi.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
+import { TmdbApiService } from "app/services/tmdbApi.service";
+import { filter, map, Observable, switchMap, tap } from "rxjs";
 
 @Component({
-  selector: 'app-tv',
-  templateUrl: './tv.component.html',
-  styleUrls: ['./tv.component.css']
+  selector: "app-tv",
+  templateUrl: "./tv.component.html",
+  styleUrls: ["./tv.component.css"],
 })
 export class TvComponent implements OnInit {
   tv$!: Observable<any>;
   genreId?: number;
   loadMoreConfig!: Object;
 
-  constructor(private route: ActivatedRoute, private tmdbApiService: TmdbApiService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private tmdbApiService: TmdbApiService
+  ) {}
 
   ngOnInit(): void {
     this.setLoadMoreConfig();
 
-    this.route.queryParams.subscribe(params => {
-      if (params['genero'] && (params['genero'].trim() !== '')) this.genreId = params['genero'];
-      this.tv$ = this.tmdbApiService.discover('tv', { with_genres: this.genreId, without_genres: 16 })
-      this.setLoadMoreConfig();
-    });
+    this.tv$ = this.route.queryParams.pipe(
+      filter(
+        (params: Params): any =>
+          params["genero"] && params["genero"].trim() !== ""
+      ),
+      map((params: Params): any => params["genero"]),
+      switchMap((genreId: any): Observable<any> => {
+        this.genreId = genreId;
+        this.setLoadMoreConfig();
+        return this.tmdbApiService.discover("tv", {
+          with_genres: this.genreId,
+        });
+      })
+    );
   }
 
   private setLoadMoreConfig(): void {
     this.loadMoreConfig = {
-      method: 'discover',
-      type: 'tv',
+      method: "discover",
+      type: "tv",
       params: {
         with_genres: this.genreId,
-        without_genres: 16
-      }
-    }
+        without_genres: 16,
+      },
+    };
   }
-
 }
