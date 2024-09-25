@@ -1,15 +1,15 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { TmdbApiService } from 'app/services/tmdbApi.service';
-import { environment } from 'environments/environment';
-import { delay, map, Observable, Subscription } from 'rxjs';
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { TmdbApiService } from "app/services/tmdbApi.service";
+import { environment } from "environments/environment";
+import { delay, map, Observable, Subscription } from "rxjs";
 
 @Component({
-  selector: 'grid-list',
-  templateUrl: './grid-list.component.html',
-  styleUrls: ['./grid-list.component.css']
+  selector: "grid-list",
+  templateUrl: "./grid-list.component.html",
+  styleUrls: ["./grid-list.component.css"],
 })
 export class GridListComponent implements OnInit {
-  @ViewChild('arcitems') arcItems!: ElementRef;
+  @ViewChild("arcitems") arcItems!: ElementRef;
   @Input() data$!: Observable<any>;
   @Input() loadMoreConfig!: any;
   data: any;
@@ -20,20 +20,20 @@ export class GridListComponent implements OnInit {
   listSub!: Subscription;
   totalPages!: number;
 
-  constructor(private tmdbApiService: TmdbApiService) { }
+  constructor(private tmdbApiService: TmdbApiService) {}
 
   ngOnInit(): void {
     if (!this.data$) return;
 
     this.listSub = this.data$
       .pipe(
-        map(data => {
+        map((data: any): number[] => {
           this.data = data;
           this.totalPages = data.total_pages;
-          return data = Array<number>(data.results.length);
+          return (data = Array<number>(data.results.length));
         })
       )
-      .subscribe(listSize => {
+      .subscribe((listSize: number[]): void => {
         this.listSize = listSize;
       });
 
@@ -49,10 +49,15 @@ export class GridListComponent implements OnInit {
       return;
     }
 
-    if ((this.loadMoreConfig.method === 'discover') && (this.loadMoreConfig?.type && this.loadMoreConfig?.params)) {
-      this.loadMoreSub = this.tmdbApiService.discover(this.loadMoreConfig.type, this.loadMoreConfig?.params)
-        .subscribe(data => {
-          data.results.forEach((element: any) => {
+    if (
+      this.loadMoreConfig.method === "discover" &&
+      this.loadMoreConfig?.type &&
+      this.loadMoreConfig?.params
+    ) {
+      this.loadMoreSub = this.tmdbApiService
+        .discover(this.loadMoreConfig.type, this.loadMoreConfig?.params)
+        .subscribe((data: any): void => {
+          data.results.forEach((element: any): void => {
             this.data.results.push(element);
           });
           this.loadMoreSub?.unsubscribe();
@@ -62,12 +67,14 @@ export class GridListComponent implements OnInit {
     }
 
     if (this.loadMoreConfig?.query) {
-      this.loadMoreSub = this.tmdbApiService.search(this.loadMoreConfig.query, this.page).subscribe(data => {
-        data.results.forEach((element: any) => {
-          this.data.results.push(element);
+      this.loadMoreSub = this.tmdbApiService
+        .search(this.loadMoreConfig.query, this.page)
+        .subscribe((data: any): void => {
+          data.results.forEach((element: any): void => {
+            this.data.results.push(element);
+          });
+          this.loadMoreSub?.unsubscribe();
         });
-        this.loadMoreSub?.unsubscribe();
-      });
     }
   }
 
