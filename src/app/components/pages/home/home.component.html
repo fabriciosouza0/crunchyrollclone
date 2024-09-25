@@ -1,32 +1,51 @@
 <slider></slider>
 <div class="arc-content">
-    <!-- Section de Filmes -->
-    <section class="wrapper">
-        <slider-inline class="recommendations" [mediaType]="'movie'" [sliderTitle]="'Recomendações'"
-            [sliderData$]="popularMovies$">
-        </slider-inline>
-        <slider-inline class="critcs-love" [mediaType]="'movie'" [sliderTitle]="'Favoritos da Crítica'"
-            [sliderData$]="topRatedMovies$">
-        </slider-inline>
-        <slider-inline class="family" [mediaType]="'movie'" [sliderTitle]="'Reúna a Família'"
-            [sliderData$]="familyMovies$">
-        </slider-inline>
-    </section>
-    <!-- Fim -->
+  <!-- Section de Filmes -->
+  <section class="wrapper">
+    <slider-inline
+      class="recommendations"
+      [mediaType]="'movie'"
+      [sliderTitle]="'Recomendações'"
+      [sliderData$]="popularMovies$"
+    >
+    </slider-inline>
+    <slider-inline
+      class="critcs-love"
+      [mediaType]="'movie'"
+      [sliderTitle]="'Favoritos da Crítica'"
+      [sliderData$]="topRatedMovies$"
+    >
+    </slider-inline>
+    <slider-inline
+      class="family"
+      [mediaType]="'movie'"
+      [sliderTitle]="'Reúna a Família'"
+      [sliderData$]="familyMovies$"
+    >
+    </slider-inline>
+  </section>
+  <!-- Fim -->
 
-    <!-- Destaque -->
-    <app-destaque class="highligth">
-    </app-destaque>
-    <!-- Fim -->
+  <!-- Destaque -->
+  <app-destaque> </app-destaque>
+  <!-- Fim -->
 
-    <!-- Section de Séries -->
-    <section class="wrapper">
-        <slider-inline class="top-tv" [mediaType]="'tv'" [sliderTitle]="'Séries para Maratonar'"
-            [sliderData$]="popularSeries$">
-        </slider-inline>
-        <slider-inline class="memorable-tv" [mediaType]="'tv'" [sliderTitle]="'Séries Marcantes'"
-            [sliderData$]="topRatedSeries$">
-        </slider-inline>
-    </section>
-    <!-- Fim -->
+  <!-- Section de Séries -->
+  <section class="wrapper">
+    <slider-inline
+      class="top-tv"
+      [mediaType]="'tv'"
+      [sliderTitle]="'Séries para Maratonar'"
+      [sliderData$]="popularSeries$"
+    >
+    </slider-inline>
+    <slider-inline
+      class="memorable-tv"
+      [mediaType]="'tv'"
+      [sliderTitle]="'Séries Marcantes'"
+      [sliderData$]="topRatedSeries$"
+    >
+    </slider-inline>
+  </section>
+  <!-- Fim -->
 </div>
