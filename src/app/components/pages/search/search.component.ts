@@ -1,17 +1,22 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TmdbApiService } from 'app/services/tmdbApi.service';
-import { environment } from 'environments/environment';
-import { map, Observable } from 'rxjs';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { TmdbApiService } from "app/services/tmdbApi.service";
+import { environment } from "environments/environment";
+import { map, Observable, Subscriber } from "rxjs";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: "app-search",
+  templateUrl: "./search.component.html",
+  styleUrls: ["./search.component.css"],
 })
 export class SearchComponent implements OnInit {
-  @ViewChild('arcResults', { static: false }) arcResults!: ElementRef;
+  @ViewChild("arcResults", { static: false }) arcResults!: ElementRef;
   searchForm!: FormGroup;
   page: number = 1;
   query!: string;
@@ -24,23 +29,21 @@ export class SearchComponent implements OnInit {
     private tmdbApiService: TmdbApiService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    document.getElementById('search')?.focus();
+    document.getElementById("search")?.focus();
 
-    this.searchForm = new FormGroup(
-      {
-        search: new FormControl('', Validators.required)
-      }
-    );
+    this.searchForm = new FormGroup({
+      search: new FormControl("", Validators.required),
+    });
 
-    this.route.queryParams.subscribe(params => {
-      this.query = params['query'] !== undefined ? params['query'] : false;
-      this.page = params['page'] !== undefined ? params['page'] : 1;
+    this.route.queryParams.subscribe((params: Params): void => {
+      this.query = params["query"] !== undefined ? params["query"] : false;
+      this.page = params["page"] !== undefined ? params["page"] : 1;
 
-      const searchInput = this.searchForm.get('search');
-
+      const searchInput: AbstractControl<any, any> | null =
+        this.searchForm.get("search");
       if (this.query) {
         this.search(this.query, this.page);
         searchInput?.setValue(this.query);
@@ -49,22 +52,22 @@ export class SearchComponent implements OnInit {
 
       // Caso esteja acessando a rota sem a queryParam 'query'
       if (!(this.search$ instanceof Observable)) {
-        this.search$ = new Observable((subscriber) => {
+        this.search$ = new Observable((subscriber: Subscriber<any>): void => {
           subscriber.next([]);
           subscriber.complete();
-        })
+        });
       }
-    })
+    });
   }
 
-  submit() {
+  submit(): void {
     if (this.searchForm.invalid) return;
 
     this.query = this.searchForm.value.search;
-    this.router.navigate(['/search'], { queryParams: { query: this.query } });
+    this.router.navigate(["/search"], { queryParams: { query: this.query } });
   }
 
-  search(query: string, page: number) {
+  search(query: string, page: number): void {
     this.search$ = this.tmdbApiService.search(query, page);
     this.searchResults$ = this.tmdbApiService.search(query, page);
     this.setLoadMoreConfig();
@@ -72,9 +75,9 @@ export class SearchComponent implements OnInit {
 
   private setLoadMoreConfig(): void {
     this.loadMoreConfig = {
-      method: 'search',
+      method: "search",
       query: this.query,
-      params: {}
-    }
+      params: {},
+    };
   }
 }
