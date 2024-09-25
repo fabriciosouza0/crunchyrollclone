@@ -1,73 +1,83 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
-import { TmdbApiService } from 'app/services/tmdbApi.service';
-import { filter, map, Observable, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { TmdbApiService } from "app/services/tmdbApi.service";
+import { map, Observable, Subscription, tap } from "rxjs";
 
 @Component({
-  selector: 'app-discover',
-  templateUrl: './discover.component.html',
-  styleUrls: ['./discover.component.css']
+  selector: "app-discover",
+  templateUrl: "./discover.component.html",
+  styleUrls: ["./discover.component.css"],
 })
 export class DiscoverComponent implements OnInit, OnDestroy {
   routerSub!: Subscription;
   genres$!: Observable<any>;
-  genreId?: number;
-  genreName: string = 'Generos';
-  displayPage!: string;
+  genreId!: number;
+  genreName: string = "Generos";
+  displayPage: string = "Filmes";
   page!: string;
 
-  constructor(private router: Router, private tmdbApiService: TmdbApiService) { }
+  constructor(private router: Router, private tmdbApiService: TmdbApiService) {}
 
   ngOnInit(): void {
-    this.movies();
+    const url: string = this.router.url;
 
-    this.routerSub = this.router.events
-      .pipe(
-        filter((events: Event): events is RouterEvent => events instanceof NavigationEnd)
-      )
-      .subscribe(navigation => {
-        const url = navigation.url;
-        if (url === '/discover') {
-          this.movies();
-          return;
-        }
-      });
+    switch (url) {
+      case "/discover/series":
+        this.tv();
+        break;
+      case "/discover/animes":
+        this.animes();
+        break;
+      default:
+        this.movies();
+    }
   }
 
   movies(): void {
-    this.moveTo('Filmes', 'movie', false, false);
+    this.moveTo("Filmes", "movie", false);
   }
 
   tv(): void {
-    this.moveTo('Séries', 'tv', false, true);
+    this.moveTo("Séries", "tv", false);
   }
 
   animes(): void {
-    this.moveTo('Animes', 'tv', true, false);
+    this.moveTo("Animes", "tv", true);
   }
 
-  private moveTo(displayPage: string, genresFor: string, isAnime: boolean, isTv: boolean): void {
+  private moveTo(
+    displayPage: string,
+    genresFor: string,
+    isAnime: boolean
+  ): void {
     this.displayPage = displayPage;
-    this.page = displayPage.toLowerCase().replace(/[é]/g, "e");
-    this.genreId = undefined;
-    this.genreName = 'Generos';
+    this.page = this.displayPage.toLowerCase().replace(/[é]/g, "e");
+    this.genreName = "Generos";
 
-    if (!isAnime && !isTv) {
-      this.genres$ = this.tmdbApiService.genres(genresFor);
-      this.navigate(this.page, { genero: this.genreId });
-      return;
-    }
-
-    this.genres$ = this.tmdbApiService.genres('tv')
-      .pipe(
-        map(genres => {
-          genres = genres.filter((genre: any) => genre.id != 16);
-
+    if (isAnime) {
+      this.genres$ = this.tmdbApiService.genres("tv").pipe(
+        map((genres: any): any => {
+          genres = genres.filter((genre: any): boolean => genre.id != 16);
+          this.genreId = genres[0]?.id;
           return genres;
+        }),
+        tap(():void => {
+          this.navigate(this.page, { genero: this.genreId });
         })
       );
 
-    this.navigate(this.page, { genero: this.genreId })
+      return;
+    }
+
+    this.genres$ = this.tmdbApiService.genres(genresFor).pipe(
+      tap((genres) => {
+        this.genreId = genres[0]?.id;
+      }),
+      tap(() => {
+        // Apenas após garantir que o gênero foi definido
+        this.navigate(this.page, { genero: this.genreId });
+      })
+    );
   }
 
   changeGenre(event: any): void {
@@ -76,15 +86,17 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     this.genreId = genreId;
     this.genreName = genreName;
 
-    this.navigate(this.page, { genero: genreId })
+    this.navigate(this.page, { genero: genreId });
   }
 
   navigate(route: string, genre: Object) {
-    this.router.navigate(['/discover/' + route], { queryParams: genre });
+    console.log(genre);
+    this.router.navigate(["/discover/" + route], { queryParams: genre });
   }
 
   ngOnDestroy(): void {
-    this.routerSub.unsubscribe();
+    if (this.routerSub) {
+      this.routerSub.unsubscribe();
+    }
   }
-
 }
