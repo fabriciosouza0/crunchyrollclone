@@ -1,24 +1,30 @@
 <div class="wrapper">
-    <form action="" [formGroup]="searchForm" (ngSubmit)="submit()">
-        <input formControlName="search" class="title" id="search" type="search">
-    </form>
-    <div *ngIf="search$ | async as search; else loadingResults">
-        <div *ngIf="search != 'notfound' else notFound" #arcResults>
-            <grid-list [data$]="searchResults$" [loadMoreConfig]="loadMoreConfig"></grid-list>
-        </div>
+  <form action="" [formGroup]="searchForm" (ngSubmit)="submit()">
+    <input formControlName="search" class="title" id="search" type="search" />
+  </form>
+  <div *ngIf="search$ | async as search; else loadingResults">
+    <div *ngIf="search != 'notfound'; else notFound" #arcResults>
+      <grid-list
+        [data$]="searchResults$"
+        [loadMoreConfig]="loadMoreConfig"
+      ></grid-list>
     </div>
+  </div>
 </div>
 
 <ng-template #loadingResults>
-    <div class="arc-card-inline">
-        <div class="card-inline-poster animated-background"></div>
-        <div class="card-inline-title animated-background"></div>
-        <div class="card-inline-rate animated-background"></div>
-    </div>
+  <div class="arc-card-inline">
+    <div class="card-inline-poster animated-background"></div>
+    <div class="card-inline-title animated-background"></div>
+    <div class="card-inline-rate animated-background"></div>
+  </div>
 </ng-template>
 
 <ng-template #notFound>
-    <div class="flex" style="justify-content: center; align-items: center; padding: 2rem;">
-        <div class="title">Nenhum resultado encontrado ;(</div>
-    </div>
+  <div
+    class="flex"
+    style="justify-content: center; align-items: center; padding: 2rem"
+  >
+    <div class="title">Nenhum resultado encontrado ;(</div>
+  </div>
 </ng-template>
