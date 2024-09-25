@@ -61,7 +61,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
           this.genreId = genres[0]?.id;
           return genres;
         }),
-        tap(():void => {
+        tap((): void => {
           this.navigate(this.page, { genero: this.genreId });
         })
       );
@@ -70,10 +70,10 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     }
 
     this.genres$ = this.tmdbApiService.genres(genresFor).pipe(
-      tap((genres) => {
+      tap((genres: any): void => {
         this.genreId = genres[0]?.id;
       }),
-      tap(() => {
+      tap((): void => {
         // Apenas após garantir que o gênero foi definido
         this.navigate(this.page, { genero: this.genreId });
       })
@@ -81,8 +81,8 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   }
 
   changeGenre(event: any): void {
-    const genreId = event.target.children[0].value;
-    const genreName = event.target.children[1].value;
+    const genreId: any = event.target.children[0].value;
+    const genreName: any = event.target.children[1].value;
     this.genreId = genreId;
     this.genreName = genreName;
 
@@ -90,7 +90,6 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   }
 
   navigate(route: string, genre: Object) {
-    console.log(genre);
     this.router.navigate(["/discover/" + route], { queryParams: genre });
   }
 
