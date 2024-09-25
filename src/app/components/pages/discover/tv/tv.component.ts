@@ -32,6 +32,7 @@ export class TvComponent implements OnInit {
         this.setLoadMoreConfig();
         return this.tmdbApiService.discover("tv", {
           with_genres: this.genreId,
+          without_genres: 16,
         });
       })
     );

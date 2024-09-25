@@ -38,7 +38,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   }
 
   tv(): void {
-    this.moveTo("Séries", "tv", false);
+    this.moveTo("Séries", "tv", true);
   }
 
   animes(): void {
@@ -48,13 +48,13 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   private moveTo(
     displayPage: string,
     genresFor: string,
-    isAnime: boolean
+    showAnimationGenre: boolean
   ): void {
     this.displayPage = displayPage;
     this.page = this.displayPage.toLowerCase().replace(/[é]/g, "e");
     this.genreName = "Generos";
 
-    if (isAnime) {
+    if (showAnimationGenre) {
       this.genres$ = this.tmdbApiService.genres("tv").pipe(
         map((genres: any): any => {
           genres = genres.filter((genre: any): boolean => genre.id != 16);
