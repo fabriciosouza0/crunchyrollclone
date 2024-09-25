@@ -1,27 +1,76 @@
-# Crunchyroll Clone App
+# CrunchyrollClone
 
-Projeto construido com Angular 14.1.1
+CrunchyrollClone é uma plataforma para assistir filmes, séries e animes, com o design inspirado na antiga versão da Crunchyroll. O projeto visa proporcionar uma experiência imersiva e nostálgica para os amantes de conteúdo audiovisual.
 
-## Development server
+## Hospedagem
 
-## `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O projeto está disponível online e pode ser acessado através do seguinte endereço:  
+**[https://crunchyroll-clone-app-f6419.web.app](https://crunchyroll-clone-app-f6419.web.app)**
 
-## Code scaffolding
+## Como Configurar Localmente
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 1. Clone o Repositório
 
-## Build
+Faça o clone do repositório para sua máquina local utilizando o comando:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+git clone https://github.com/seu-usuario/crunchyrollclone.git
+```
+### 2. Instale as Dependências
 
-## Running unit tests
+Navegue até o diretório do projeto e execute o seguinte comando para instalar todas as dependências:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm install
+```
 
-## Running end-to-end tests
+### 3. Crie dois arquivos no diretório src/environments/:
+#### environment.ts para o ambiente de desenvolvimento
+#### environment.prod.ts para o ambiente de produção
+#### Parao o ambiente de desenvolvimento, utilize:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+export const environment = { 
+  production: false,
+  apiKey: "", 
+  baseApiUrl: "https://api.themoviedb.org/3/",
+  baseImgUrl: "https://image.tmdb.org/t/p/",
+  baseStreamUrl: "https://embed.warezcdn.link/",
+};
+```
+#### Para o ambiente de produção, utilize:
+```bash
+export const environment = { 
+  production: true,
+  apiKey: "", 
+  baseApiUrl: "https://api.themoviedb.org/3/",
+  baseImgUrl: "https://image.tmdb.org/t/p/",
+  baseStreamUrl: "https://embed.warezcdn.link/",
+};
+```
 
-## Further help
+### 4. Obtenha uma API Key do The Movie Database (TMDb)
+Para que o projeto funcione corretamente, você precisará de uma API Key do The Movie Database (TMDb). Siga os passos abaixo para conseguir uma:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Crie uma conta no TMDb se ainda não tiver uma.
+Após fazer login, vá até a seção de API.
+Solicite uma API Key.
+Copie o Token JWT fornecido e cole no campo apiKey dos arquivos environment.ts e environment.prod.ts.
+
+### 5. Executando o Projeto
+Após configurar os arquivos de ambiente e instalar as dependências, você pode iniciar o servidor de desenvolvimento com o seguinte comando:
+
+```bash
+ng serve
+```
+
+Agora, o projeto estará disponível em:
+http://localhost:4200/.
+
+# Tecnologias Utilizadas
+### Angular: Framework para construção de SPA (Single Page Applications).
+### Firebase Hosting: Plataforma de hospedagem de sites.
+### The Movie Database API (TMDb): Utilizada para obter informações de filmes, séries e animes.
+
+# Licença
+Este projeto está sob a licença MIT. Sinta-se à vontade para usá-lo, modificá-lo e distribuí-lo.
