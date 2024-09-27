@@ -17,7 +17,7 @@
 
     <section class="arc-eps" *ngIf="episodes$ | async as episodes; else loadingEps">
         <div *ngFor="let ep of episodes">
-            <a href="{{baseStreamUrl}}/serie/{{imdbId$ |async}}/{{seasonNumber}}/{{ep.episode_number}}"
+            <a href="{{baseStreamUrl}}serie/{{imdbId$ |async}}/{{seasonNumber}}/{{ep.episode_number}}"
                 crossorigin="anonymous" target="_blank">
                 <div class="arc-card-inline">
                     <div class="card-inline-poster">
