@@ -19,6 +19,7 @@ export class TvComponent implements OnInit {
   episodes$!: Observable<any>;
   seasonNumber!: number;
   episodeCount!: Array<any>;
+  baseStreamUrl: string = environment.baseStreamUrl;
   baseImgUrl: string = `${environment.baseImgUrl}original/`;
 
   constructor(
